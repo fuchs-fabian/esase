@@ -24,7 +24,7 @@
 
 ### What is `esase`?
 
-`esase` is a popup-based Linux Bash script (tool) designed for installing, uninstalling and managing system apps/packages/package managers...\
+`esase` is a popup-based Linux Bash script (tool) designed for installing, uninstalling and managing system apps/packages/package managers...
 
 > It doesn't matter which Linux distribution you use. Well almost, they have to be supported by `esase`.\
 > It automatically detects the distribution/system in use and executes the necessary commands based on that information.
