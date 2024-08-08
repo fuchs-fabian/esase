@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=esase
+Comment=Run esase script in gui mode
+Exec=esase -g
+Icon=/usr/local/share/esase/esase-icon.png
+Terminal=true
+Type=Application
+Categories=Utility;System;

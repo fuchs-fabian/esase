@@ -1,0 +1,298 @@
+{
+  "Management": [
+    {
+      "name": "com.github.tchx84.Flatseal",
+      "alias": "Flatseal",
+      "install": true,
+      "description": "Tool for managing Flatpak permissions."
+    },
+    {
+      "name": "com.mattjakeman.ExtensionManager",
+      "alias": "Extension Manager",
+      "install": true,
+      "description": null
+    },
+    {
+      "name": "io.missioncenter.MissionCenter",
+      "alias": "Mission Center",
+      "install": true,
+      "description": "Monitor system resource usage"
+    },
+    {
+      "name": "org.pulseaudio.pavucontrol",
+      "alias": "PulseAudio",
+      "install": true,
+      "description": null
+    },
+    {
+      "name": "org.openrgb.OpenRGB",
+      "alias": "OpenRGB",
+      "install": false,
+      "description": null
+    }
+  ],
+  "Security": [
+    {
+      "name": "org.gnome.seahorse.Application",
+      "alias": "Passwords and Keys",
+      "install": true,
+      "description": null
+    },
+    {
+      "name": "com.bitwarden.desktop",
+      "alias": "Bitwarden",
+      "install": true,
+      "description": null
+    },
+    {
+      "name": "com.belmoussaoui.Authenticator",
+      "alias": "Authenticator",
+      "install": true,
+      "description": null
+    },
+    {
+      "name": "de.bund.ausweisapp.ausweisapp2",
+      "alias": "AusweisApp2",
+      "install": true,
+      "description": null
+    }
+  ],
+  "Browser": [
+    {
+      "name": "org.mozilla.firefox",
+      "alias": "Firefox",
+      "install": true,
+      "description": null
+    }
+  ],
+  "Communication": [
+    {
+      "name": "org.mozilla.Thunderbird",
+      "alias": "Thunderbird",
+      "install": true,
+      "description": null
+    },
+    {
+      "name": "com.discordapp.Discord",
+      "alias": "Discord",
+      "install": true,
+      "description": null
+    },
+    {
+      "name": "com.slack.Slack",
+      "alias": "Slack",
+      "install": true,
+      "description": null
+    },
+    {
+      "name": "us.zoom.Zoom",
+      "alias": "Zoom",
+      "install": true,
+      "description": null
+    }
+  ],
+  "Office": [
+    {
+      "name": "md.obsidian.Obsidian",
+      "alias": "Obsidian",
+      "install": true,
+      "description": null
+    },
+    {
+      "name": "com.logseq.Logseq",
+      "alias": "Logseq",
+      "install": true,
+      "description": null
+    },
+    {
+      "name": "org.texstudio.TeXstudio",
+      "alias": "TeXstudio",
+      "install": true,
+      "description": "Integrated writing environment for creating LaTeX documents."
+    },
+    {
+      "name": "com.github.flxzt.rnote",
+      "alias": "Rnote",
+      "install": true,
+      "description": null
+    }
+  ],
+  "Media": [
+    {
+      "name": "org.gnome.Loupe",
+      "alias": "Loupe",
+      "install": true,
+      "description": "Simple image viewer."
+    },
+    {
+      "name": "com.github.tenderowl.frog",
+      "alias": "Frog",
+      "install": true,
+      "description": "OCR tool for text extraction from images."
+    },
+    {
+      "name": "org.videolan.VLC",
+      "alias": "VLC Media Player",
+      "install": true,
+      "description": null
+    },
+    {
+      "name": "org.gnome.gitlab.YaLTeR.VideoTrimmer",
+      "alias": "Video Trimmer",
+      "install": true,
+      "description": null
+    },
+    {
+      "name": "com.makemkv.MakeMKV",
+      "alias": "MakeMKV",
+      "install": true,
+      "description": "Tool for ripping DVDs and Blu-rays to MKV format."
+    },
+    {
+      "name": "fr.handbrake.ghb",
+      "alias": "HandBrake",
+      "install": true,
+      "description": "Video transcoder for converting video formats."
+    },
+    {
+      "name": "org.musicbrainz.Picard",
+      "alias": "MusicBrainz Picard",
+      "install": true,
+      "description": "Music tagger for organizing music collections."
+    },
+    {
+      "name": "com.github.unrud.VideoDownloader",
+      "alias": "Video Downloader",
+      "install": true,
+      "description": "Tool for downloading videos from the internet."
+    }
+  ],
+  "Data_Management": [
+    {
+      "name": "org.filezillaproject.Filezilla",
+      "alias": "FileZilla",
+      "install": true,
+      "description": null
+    },
+    {
+      "name": "org.gnome.World.PikaBackup",
+      "alias": "Pika Backup",
+      "install": true,
+      "description": "Backup your PC with Borg"
+    },
+    {
+      "name": "com.github.qarmin.czkawka",
+      "alias": "Czkawka",
+      "install": true,
+      "description": null
+    },
+    {
+      "name": "com.github.qarmin.szyszka",
+      "alias": "Szyszka",
+      "install": true,
+      "description": null
+    },
+    {
+      "name": "me.kozec.syncthingtk",
+      "alias": "Syncthing",
+      "install": false,
+      "description": null
+    }
+  ],
+  "Programming": [
+    {
+      "name": "com.visualstudio.code",
+      "alias": "Visual Studio Code",
+      "install": true,
+      "description": null
+    },
+    {
+      "name": "com.vscodium.codium",
+      "alias": "VSCodium",
+      "install": true,
+      "description": null
+    },
+    {
+      "name": "org.gnome.Builder",
+      "alias": "Builder",
+      "install": true,
+      "description": null
+    },
+    {
+      "name": "com.jetbrains.IntelliJ-IDEA-Community",
+      "alias": "IntelliJ",
+      "install": true,
+      "description": null
+    },
+    {
+      "name": "cc.arduino.IDE2",
+      "alias": "Arduino",
+      "install": true,
+      "description": null
+    },
+    {
+      "name": "org.gnome.gitg",
+      "alias": "gitg",
+      "install": true,
+      "description": "Interface for GIT"
+    },
+    {
+      "name": "org.kde.kompare",
+      "alias": "Kompare",
+      "install": true,
+      "description": "Comparing differences on files or the contents of folders recursively"
+    },
+    {
+      "name": "com.mongodb.Compass",
+      "alias": "MongoDB Compass",
+      "install": true,
+      "description": null
+    },
+    {
+      "name": "com.getpostman.Postman",
+      "alias": "Postman",
+      "install": true,
+      "description": null
+    },
+    {
+      "name": "io.podman_desktop.PodmanDesktop",
+      "alias": "Podman Desktop",
+      "install": true,
+      "description": null
+    },
+    {
+      "name": "org.freedesktop.Sdk.Extension.dotnet8/x86_64/23.08",
+      "alias": "DotNet 8",
+      "install": false,
+      "description": "Environment Variables under Flatseal -> Visual Studio Code FLATPAK_ENABLE_SDK_EXT=dotnet6"
+    }
+  ],
+  "Gaming": [
+    {
+      "name": "com.valvesoftware.Steam",
+      "alias": "Steam",
+      "install": true,
+      "description": null
+    }
+  ],
+  "Various": [
+    {
+      "name": "com.spotify.Client",
+      "alias": "Spotify",
+      "install": true,
+      "description": null
+    },
+    {
+      "name": "org.gnome.Calculator",
+      "alias": "Calculator",
+      "install": true,
+      "description": null
+    },
+    {
+      "name": "org.gnome.design.Palette",
+      "alias": "Color Palette",
+      "install": true,
+      "description": "Color palette generator and manager."
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "Console_Tools": [
+    {
+      "name": "tldr",
+      "alias": "TLDR",
+      "install": true,
+      "description": "Simplified man pages. -> https://github.com/tldr-pages/tldr"
+    },
+    {
+      "name": "pandoc",
+      "alias": "Pandoc",
+      "install": true,
+      "description": "Universal document converter. -> https://pandoc.org/"
+    },
+    {
+      "name": "testdisk",
+      "alias": "Photorec",
+      "install": true,
+      "description": "data recovery -> run: sudo photorec"
+    }
+  ]
+}

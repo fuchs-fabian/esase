@@ -1,0 +1,22 @@
+{
+  "update_all": false,
+  "remove": [
+    "firefox",
+    "totem",
+    "rhythmbox",
+    "eog",
+    "cheese",
+    "gnome-tour",
+    "gnome-photos",
+    "gnome-user-docs",
+    "gnome-contacts",
+    "gnome-weather",
+    "gnome-maps"
+  ],
+  "replace_terminal": false,
+  "install_apps": false,
+  "install_flatpak_apps": false,
+  "install_advanced_virtualization": false,
+  "install_docker": false,
+  "install_npm": false
+}

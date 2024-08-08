@@ -1,0 +1,84 @@
+{
+  "Console_Tools": [
+    {
+      "name": "tldr",
+      "alias": "TLDR",
+      "install": true,
+      "description": "Simplified man pages. -> https://github.com/tldr-pages/tldr"
+    },
+    {
+      "name": "pandoc",
+      "alias": "Pandoc",
+      "install": true,
+      "description": "Universal document converter. -> https://pandoc.org/"
+    },
+    {
+      "name": "testdisk",
+      "alias": "Photorec",
+      "install": true,
+      "description": "data recovery -> run: sudo photorec"
+    },
+    {
+      "name": "smartmontools",
+      "alias": "SMART",
+      "install": false,
+      "description": "SMART - check disks"
+    }
+  ],
+  "Extensions": [
+    {
+      "name": "gnome-shell-extension-caffeine",
+      "alias": "Caffeine",
+      "install": true,
+      "description": "Prevents the screen from sleeping."
+    }
+  ],
+  "Language_Packs": [
+    {
+      "name": "libreoffice-langpack-de",
+      "alias": "LibreOffice German Language Pack",
+      "install": true,
+      "description": null
+    }
+  ],
+  "Programming": [
+    {
+      "name": "java-latest-openjdk.x86_64",
+      "alias": "Java JDK",
+      "install": false,
+      "description": null
+    },
+    {
+      "name": "maven",
+      "alias": "Maven",
+      "install": false,
+      "description": null
+    },
+    {
+      "name": "conda",
+      "alias": "Conda",
+      "install": false,
+      "description": null
+    },
+    {
+      "name": "android-tools",
+      "alias": "Android Tools",
+      "install": false,
+      "description": null
+    }
+  ],
+  "Various": [
+    {
+      "name": "gnome-tweaks",
+      "alias": "GNOME Tweaks",
+      "install": true,
+      "description": "Tool for customizing GNOME desktop environment."
+    },
+    {
+      "name": "wireshark",
+      "alias": "Wireshark",
+      "install": true,
+      "description": "add current user to wireshark group: sudo usermod -a -G wireshark $(whoami) - run: sudo wireshark -> https://fedoramagazine.org/how-to-install-wireshark-fedora/"
+    }
+  ]
+}
