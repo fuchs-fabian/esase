@@ -232,8 +232,6 @@ To achieve a stable version and an established tool, implementing some of these 
 
 ### Contact
 
-![](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y+mAAAANlBMVEUNvYsAvIkAu4Y/xZm25dSl4Mptz64AuILO7uL///+M2L0At39dy6bW8efs+PQbv48owZJUyaL2rl2HAAAAxUlEQVR4AbWSRQIEMQgEhxhUPP//7LrbaftGVwTb/i9xTj4yH2JS9x46A8jlLZTaOmD6BqkOLdMgvFBdBkwpAZY8scBBc9tKf364GPS8xv6Ky6ByV9PBCMXJwZEFo5q/UgW7VCADtBHcJU4wZbtEc5ZOvEAX6WXeY0hygYGmMOQuPb011eo4lyfiDqVmdzcO0ZMhY+V+Te8iNfremcBrA2UdSpUDtHVgLw20WXSoyvYiNaC3ekCvKhnAPq2Cphi8/F6xf2oHpzAH+YBumW8AAAAASUVORK5CYII=)
-
 If you have general questions, suggestions, etc. and don't want it to be an issue, you can reach me at Matrix (https://app.element.io):
 
 **Invitation link**: [esase (Matrix Space)](https://matrix.to/#/#esase:matrix.org)
