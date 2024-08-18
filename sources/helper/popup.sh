@@ -19,19 +19,19 @@ set_popup_size() {
         return
     fi
 
-    # Get the screen resolution
-    screen_resolution=$(xrandr | grep '*' | awk '{print $1}')
-    
+    # Get the resolution of the primary screen
+    screen_resolution=$(xrandr | grep 'primary' | grep -o '[0-9]\+x[0-9]\+')
+
     # Check if screen resolution was found
     if [[ -z "$screen_resolution" ]]; then
         # Default size if resolution could not be determined
         log_warning "Unable to determine screen resolution. Defaulting to $WINDOW_WIDTH x $WINDOW_HEIGHT."
         return
     fi
-    
+
     # Extract width and height from the screen resolution
-    screen_width=$(echo "$screen_resolution" | sed 's/x.*//')
-    screen_height=$(echo "$screen_resolution" | sed 's/.*x//')
+    screen_width=$(echo "$screen_resolution" | cut -d'x' -f1)
+    screen_height=$(echo "$screen_resolution" | cut -d'x' -f2)
 
     # Set the window size to the screen size
     WINDOW_WIDTH=$screen_width
