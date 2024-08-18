@@ -5,7 +5,7 @@
 # To uninstall, call this script with the argument 'undo'.
 
 
-DEPENDENCIES_TO_BE_INSTALLED="jq yad xrandr" # 'pkexec' is normally preinstalled
+DEPENDENCIES_TO_BE_INSTALLED="jq yad xrandr" # 'flatpak', 'pkexec' is normally preinstalled. If not, this must be installed manually!
 
 
 # # # # # # # # # # # #|# # # # # # # # # # # #

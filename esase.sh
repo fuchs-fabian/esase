@@ -5,7 +5,10 @@
 # Read the README.md for more information.
 
 
-REQUIRED_DEPENDENCIES="pkexec jq yad xrandr"
+REQUIRED_PREINSTALLED_DEPENDENCIES="flatpak pkexec"
+
+REQUIRED_GUI_MODE_DEPENDENCIES="jq yad xrandr"
+REQUIRED_CONFIG_MODE_DEPENDENCIES="jq"
 
 
 # # # # # # # # # # # #|# # # # # # # # # # # #
@@ -104,6 +107,8 @@ FLATPAK_APPS_FILE="$APP_FILES_DIR/flatpak.json"
 
 validate_system || log_error "System validation failed. Check the system compatibility!"
 log_debug "The following Linux distribution is used to perform actions: '$DISTRO_NAME'"
+
+check_dependencies $REQUIRED_PREINSTALLED_DEPENDENCIES
 
 check_scripts_and_make_scripts_executable "$DISTRO_BASED_ACTIONS_SCRIPT" "$APP_FILE_EDITOR_SCRIPT" "$APP_INSTALLER_SCRIPT" || log_error "Validation for scripts and their executability failed!"
 
@@ -206,7 +211,7 @@ log_info "You can find the configuration files under: '$CONFIG_DIR'"
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
 if [[ $GUI == true ]]; then
-    check_dependencies $REQUIRED_DEPENDENCIES
+    check_dependencies $REQUIRED_GUI_MODE_DEPENDENCIES
     run_gui_mode
 else
     if [[ -n "$PACKAGES_TO_INSTALL" ]]; then
@@ -225,7 +230,7 @@ else
     fi
 
     if [[ -z "$PACKAGES_TO_INSTALL" && -z "$PACKAGES_TO_REMOVE" && $UPDATE_ALL_FLAG == false ]]; then
-        check_dependencies "pkexec jq"
+        check_dependencies $REQUIRED_CONFIG_MODE_DEPENDENCIES
         run_config_mode
     fi
 fi

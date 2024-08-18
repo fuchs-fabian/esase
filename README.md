@@ -41,7 +41,13 @@ Without the `-g` flag, the script operates in console mode.
 
 For example, it is currently designed to use the same configuration files to set up identical environments on different Linux distributions without needing to run multiple commands.
 
-**It only requires a few packages**: `pkexec`, `jq`, `yad`, `xrandr`
+**It only requires a few packages**:
+
+|                              | Dependencies          |
+| ---------------------------- | --------------------- |
+| **_Necessary preinstalled_** | `flatpak`, `pkexec`   |
+| **for _gui mode_**           | `jq`, `yad`, `xrandr` |
+| **for _config mode_**        | `jq`                  |
 
 **Secure default**: Nothing is executed completely with `sudo`. You are always asked beforehand so that nothing serious can happen.
 
