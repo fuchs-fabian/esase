@@ -89,11 +89,6 @@ It is a Bash script that can have a strong impact on the system. It is therefore
 | English             | `en`  |
 | German              | `de`  |
 
-### Known issues
-
-- App categories may not contain spaces or hyphens. Only `_` and upper and lower case is allowed.
-- In some cases, individual interactions in the console/terminal are still necessary. However, this has been reduced to a minimum.
-
 ## Getting Started
 
 ### Installation
@@ -214,21 +209,11 @@ And because it is so similar to the installation, you can simply make the instal
 
 ## Bugs, Suggestions, Feedback, and Needed Support
 
-> If you have any bugs, suggestions or feedback, feel free to create an issue describing what you'd like to see.
-
-Current considerations and potential improvements:
-
-- Integrate `esase` into Bash package managers.
-- Export and import of configurations while the app is installed (GUI and console).
-- Automatically detect Microsoft Windows applications and generate a configuration with Linux equivalents.
-- Support additional Linux distributions.
-- Support more languages for the popups.
-- Provide log outputs in multiple languages.
-- Support for Linux server.
+> If you have any bugs, suggestions or feedback, feel free to create an [issue](https://github.com/fuchs-fabian/esase/issues) describing what you'd like to see.
 
 In general, `TODO`s are included in the code, which would otherwise be possible.
 
-To achieve a stable version and an established tool, implementing some of these ideas is crucial, especially the package manager integration. Since this project has been developed single-handedly so far, it would be greatly appreciated if volunteers could join and contribute! 😊
+To achieve a stable version and an established tool, implementing some of these [ideas](https://github.com/fuchs-fabian/esase/labels/enhancement) is crucial, especially the [package manager integration](https://github.com/fuchs-fabian/esase/issues/4). Since this project has been developed single-handedly so far, it would be greatly appreciated if volunteers could join and contribute! 😊
 
 ### Contact
 
