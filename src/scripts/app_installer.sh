@@ -39,7 +39,7 @@ set_directories_based_on_location
 SOURCE_FILES=(
     "logger.sh"
     "general/preparations.sh"
-    "helper/json_app_file_extractor.sh"
+    "json/json_app_file_extractor.sh"
 )
 
 for source_file in "${SOURCE_FILES[@]}"; do

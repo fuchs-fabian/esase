@@ -40,7 +40,7 @@ set_directories_based_on_location
 
 SOURCE_FILES=(
     "logger.sh"
-    "helper/system_validation.sh"
+    "general/system_validation.sh"
 )
 
 for source_file in "${SOURCE_FILES[@]}"; do

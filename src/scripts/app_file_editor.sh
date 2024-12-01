@@ -44,8 +44,8 @@ SOURCE_FILES=(
     "general/conf.sh"
     "general/gui.sh"
     "general/preparations.sh"
-    "helper/json_app_file_extractor.sh"
-    "helper/popup.sh"
+    "json/json_app_file_extractor.sh"
+    "general/popup.sh"
     "lang/language.sh"
 )
 
