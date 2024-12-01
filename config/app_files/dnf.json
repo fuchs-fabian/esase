@@ -9,13 +9,13 @@
     {
       "name": "pandoc",
       "alias": "Pandoc",
-      "install": true,
+      "install": false,
       "description": "Universal document converter. -> https://pandoc.org/"
     },
     {
       "name": "testdisk",
       "alias": "Photorec",
-      "install": true,
+      "install": false,
       "description": "data recovery -> run: sudo photorec"
     },
     {
@@ -37,7 +37,7 @@
     {
       "name": "libreoffice-langpack-de",
       "alias": "LibreOffice German Language Pack",
-      "install": true,
+      "install": false,
       "description": null
     }
   ],
@@ -77,7 +77,7 @@
     {
       "name": "wireshark",
       "alias": "Wireshark",
-      "install": true,
+      "install": false,
       "description": "add current user to wireshark group: sudo usermod -a -G wireshark $(whoami) - run: sudo wireshark -> https://fedoramagazine.org/how-to-install-wireshark-fedora/"
     }
   ]

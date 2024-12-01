@@ -9,13 +9,13 @@
     {
       "name": "pandoc",
       "alias": "Pandoc",
-      "install": true,
+      "install": false,
       "description": "Universal document converter. -> https://pandoc.org/"
     },
     {
       "name": "testdisk",
       "alias": "Photorec",
-      "install": true,
+      "install": false,
       "description": "data recovery -> run: sudo photorec"
     }
   ]

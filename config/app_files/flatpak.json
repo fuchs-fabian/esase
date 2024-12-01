@@ -15,13 +15,13 @@
     {
       "name": "io.missioncenter.MissionCenter",
       "alias": "Mission Center",
-      "install": true,
+      "install": false,
       "description": "Monitor system resource usage"
     },
     {
       "name": "org.pulseaudio.pavucontrol",
       "alias": "PulseAudio",
-      "install": true,
+      "install": false,
       "description": null
     },
     {
@@ -53,7 +53,7 @@
     {
       "name": "de.bund.ausweisapp.ausweisapp2",
       "alias": "AusweisApp2",
-      "install": true,
+      "install": false,
       "description": null
     }
   ],
@@ -75,19 +75,19 @@
     {
       "name": "com.discordapp.Discord",
       "alias": "Discord",
-      "install": true,
+      "install": false,
       "description": null
     },
     {
       "name": "com.slack.Slack",
       "alias": "Slack",
-      "install": true,
+      "install": false,
       "description": null
     },
     {
       "name": "us.zoom.Zoom",
       "alias": "Zoom",
-      "install": true,
+      "install": false,
       "description": null
     }
   ],
@@ -95,25 +95,25 @@
     {
       "name": "md.obsidian.Obsidian",
       "alias": "Obsidian",
-      "install": true,
+      "install": false,
       "description": null
     },
     {
       "name": "com.logseq.Logseq",
       "alias": "Logseq",
-      "install": true,
+      "install": false,
       "description": null
     },
     {
       "name": "org.texstudio.TeXstudio",
       "alias": "TeXstudio",
-      "install": true,
+      "install": false,
       "description": "Integrated writing environment for creating LaTeX documents."
     },
     {
       "name": "com.github.flxzt.rnote",
       "alias": "Rnote",
-      "install": true,
+      "install": false,
       "description": null
     }
   ],
@@ -127,7 +127,7 @@
     {
       "name": "com.github.tenderowl.frog",
       "alias": "Frog",
-      "install": true,
+      "install": false,
       "description": "OCR tool for text extraction from images."
     },
     {
@@ -139,31 +139,31 @@
     {
       "name": "org.gnome.gitlab.YaLTeR.VideoTrimmer",
       "alias": "Video Trimmer",
-      "install": true,
+      "install": false,
       "description": null
     },
     {
       "name": "com.makemkv.MakeMKV",
       "alias": "MakeMKV",
-      "install": true,
+      "install": false,
       "description": "Tool for ripping DVDs and Blu-rays to MKV format."
     },
     {
       "name": "fr.handbrake.ghb",
       "alias": "HandBrake",
-      "install": true,
+      "install": false,
       "description": "Video transcoder for converting video formats."
     },
     {
       "name": "org.musicbrainz.Picard",
       "alias": "MusicBrainz Picard",
-      "install": true,
+      "install": false,
       "description": "Music tagger for organizing music collections."
     },
     {
       "name": "com.github.unrud.VideoDownloader",
       "alias": "Video Downloader",
-      "install": true,
+      "install": false,
       "description": "Tool for downloading videos from the internet."
     }
   ],
@@ -171,7 +171,7 @@
     {
       "name": "org.filezillaproject.Filezilla",
       "alias": "FileZilla",
-      "install": true,
+      "install": false,
       "description": null
     },
     {
@@ -183,13 +183,13 @@
     {
       "name": "com.github.qarmin.czkawka",
       "alias": "Czkawka",
-      "install": true,
+      "install": false,
       "description": null
     },
     {
       "name": "com.github.qarmin.szyszka",
       "alias": "Szyszka",
-      "install": true,
+      "install": false,
       "description": null
     },
     {
@@ -203,61 +203,61 @@
     {
       "name": "com.visualstudio.code",
       "alias": "Visual Studio Code",
-      "install": true,
+      "install": false,
       "description": null
     },
     {
       "name": "com.vscodium.codium",
       "alias": "VSCodium",
-      "install": true,
+      "install": false,
       "description": null
     },
     {
       "name": "org.gnome.Builder",
       "alias": "Builder",
-      "install": true,
+      "install": false,
       "description": null
     },
     {
       "name": "com.jetbrains.IntelliJ-IDEA-Community",
       "alias": "IntelliJ",
-      "install": true,
+      "install": false,
       "description": null
     },
     {
       "name": "cc.arduino.IDE2",
       "alias": "Arduino",
-      "install": true,
+      "install": false,
       "description": null
     },
     {
       "name": "org.gnome.gitg",
       "alias": "gitg",
-      "install": true,
+      "install": false,
       "description": "Interface for GIT"
     },
     {
       "name": "org.kde.kompare",
       "alias": "Kompare",
-      "install": true,
+      "install": false,
       "description": "Comparing differences on files or the contents of folders recursively"
     },
     {
       "name": "com.mongodb.Compass",
       "alias": "MongoDB Compass",
-      "install": true,
+      "install": false,
       "description": null
     },
     {
       "name": "com.getpostman.Postman",
       "alias": "Postman",
-      "install": true,
+      "install": false,
       "description": null
     },
     {
       "name": "io.podman_desktop.PodmanDesktop",
       "alias": "Podman Desktop",
-      "install": true,
+      "install": false,
       "description": null
     },
     {
@@ -271,7 +271,7 @@
     {
       "name": "com.valvesoftware.Steam",
       "alias": "Steam",
-      "install": true,
+      "install": false,
       "description": null
     }
   ],
@@ -285,13 +285,13 @@
     {
       "name": "org.gnome.Calculator",
       "alias": "Calculator",
-      "install": true,
+      "install": false,
       "description": null
     },
     {
       "name": "org.gnome.design.Palette",
       "alias": "Color Palette",
-      "install": true,
+      "install": false,
       "description": "Color palette generator and manager."
     }
   ]
