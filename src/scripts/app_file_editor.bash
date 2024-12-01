@@ -592,7 +592,6 @@ edit_app_file() {
 # # # # # # # # # # # #|# # # # # # # # # # # #
 
 log_info "'$SIMPLE_SCRIPT_NAME_WITHOUT_FILE_EXTENSION' has started."
-show_log_file
 
 edit_app_file "$APP_FILE"
 

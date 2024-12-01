@@ -150,7 +150,6 @@ install_apps() {
 # # # # # # # # # # # #|# # # # # # # # # # # #
 
 log_info "'$SIMPLE_SCRIPT_NAME_WITHOUT_FILE_EXTENSION' has started."
-show_log_file
 
 install_apps "$APP_FILE" "$INSTALL_COMMAND"
 

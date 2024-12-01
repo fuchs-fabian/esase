@@ -193,7 +193,6 @@ set_language
 # # # # # # # # # # # #|# # # # # # # # # # # #
 
 log_info "'$SIMPLE_SCRIPT_NAME_WITHOUT_FILE_EXTENSION' has started."
-show_log_file
 
 log_info "You can find the configuration files under: '$CONFIG_DIR'"
 

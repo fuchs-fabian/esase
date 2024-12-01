@@ -255,8 +255,6 @@ log_debug "The following Linux distribution is used to perform actions: '$DISTRO
 
 log_debug "$PATH"
 
-show_log_file
-
 check_scripts_and_make_scripts_executable "$DISTRO_BASED_ACTIONS_SCRIPT" || log_error "Validation for scripts and their executability failed!"
 
 case "$1" in

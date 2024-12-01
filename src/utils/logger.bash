@@ -4,17 +4,13 @@
 # This source enables the logging of a bash script.
 # It is also possible to use popups for logging if the 'yad' package is installed.
 
-ENABLE_ADVANCED_LOGGING=true # Can be overwritten without problems
-ENABLE_DEBUG_LOGGING=false   # Can be overwritten without problems
-ENABLE_GUI_FOR_LOGGING=true  # Can be overwritten without problems
-
-LOG_FILE_PATH="/tmp" # Can be overwritten, but is not recommended
+ENABLE_DEBUG_LOGGING=false  # Can be overwritten without problems
+ENABLE_GUI_FOR_LOGGING=true # Can be overwritten without problems
 
 # # # # # # # # # # # #|# # # # # # # # # # # #
 #              SCRIPT INFORMATION             #
 # # # # # # # # # # # #|# # # # # # # # # # # #
 
-SCRIPT_DIR=$(dirname "$(realpath "$0")")
 SCRIPT_NAME="$0"
 SIMPLE_SCRIPT_NAME=$(basename "$SCRIPT_NAME")
 SIMPLE_SCRIPT_NAME_WITHOUT_FILE_EXTENSION="${SIMPLE_SCRIPT_NAME%.*}"
@@ -27,42 +23,86 @@ NOTIFICATION_WINDOW_WIDTH=500
 NOTIFICATION_WINDOW_HEIGHT=100
 
 # # # # # # # # # # # #|# # # # # # # # # # # #
-#              LOGGING DIRECTORIES            #
-# # # # # # # # # # # #|# # # # # # # # # # # #
-
-LOG_DIR="${LOG_FILE_PATH}/${SIMPLE_SCRIPT_NAME_WITHOUT_FILE_EXTENSION}_logs/"
-LOG_FILE="$(date +"%Y-%m-%d_%H-%M-%S")_log_${SIMPLE_SCRIPT_NAME_WITHOUT_FILE_EXTENSION}.txt"
-LOG_FILE_WITH_LOG_DIR="${LOG_DIR}${LOG_FILE}"
-
-# # # # # # # # # # # #|# # # # # # # # # # # #
 #             LOGGING FUNCTIONALITY           #
 # # # # # # # # # # # #|# # # # # # # # # # # #
 
-log() {
-    local level="$1"
+LOG_DIR="/tmp/"
+
+function log {
+    local severity="$1"
     local message="$2"
 
-    if [[ ! -d "$LOG_DIR" ]]; then
-        mkdir -p "$LOG_DIR"
+    local log_level
+    if [ "$ENABLE_DEBUG_LOGGING" = true ]; then
+        log_level=7
+    else
+        log_level=6
     fi
 
-    local script_info=""
-    if [ "$ENABLE_ADVANCED_LOGGING" = true ]; then
-        script_info=" ($SIMPLE_SCRIPT_NAME)"
+    local log_dir="$LOG_DIR"
+
+    local severity_code
+
+    # Set severity code
+    case "$severity" in
+    debug | 7)
+        severity_code=7
+        ;;
+    info | 6)
+        severity_code=6
+        ;;
+    notice | 5)
+        severity_code=5
+        ;;
+    warn | 4)
+        severity_code=4
+        ;;
+    error | 3)
+        severity_code=3
+        ;;
+    crit | 2)
+        severity_code=2
+        ;;
+    alert | 1)
+        severity_code=1
+        ;;
+    emerg | 0)
+        severity_code=0
+        ;;
+    *)
+        # Default to debug if severity is unknown
+        severity_code=7
+        echo "Unknown severity: $severity"
+        ;;
+    esac
+
+    if [ "$severity_code" -le 4 ]; then
+        simbashlog_action="log"
+    else
+        simbashlog_action="console"
     fi
 
-    if [[ -n "$message" ]]; then
-        while IFS= read -r line; do
-            echo "$(date +"%d.%m.%Y %H:%M:%S") - $level - $line" >>"$LOG_FILE_WITH_LOG_DIR"
-            echo "  $level$script_info - $line"
-        done <<<"$message"
+    local simbashlog_command=("simbashlog" "--action" "$simbashlog_action" "--severity" "$severity_code" "--message" "$message" "--log-level" "$log_level")
+
+    if [ "$severity_code" -le 4 ]; then
+        simbashlog_command+=("--log-dir" "$log_dir")
+    fi
+
+    # Execute simbashlog command
+    "${simbashlog_command[@]}" ||
+        {
+            echo "Failed to execute: simbashlog"
+            exit 1
+        }
+
+    # Exit if severity is error or higher
+    if [[ "$severity_code" -lt 3 ]]; then
+        exit 1
     fi
 }
 
 log_debug() {
-    if [ "$ENABLE_DEBUG_LOGGING" = true ]; then
-        log "DEBUG  " "$1"
-    fi
+    log debug "$1"
 }
 
 check_gui_support() {
@@ -74,15 +114,15 @@ check_gui_support() {
 }
 
 log_cmd() {
-    log "CMD    " "$1"
+    log debug "CMD: $1"
 }
 
 log_info() {
-    log "INFO   " "$1"
+    log info "$1"
 }
 
 log_warning() {
-    log "WARNING" "$1"
+    log warn "$1"
 
     if [ "$ENABLE_GUI_FOR_LOGGING" = true ] && check_gui_support; then
         yad --warning --width=$NOTIFICATION_WINDOW_WIDTH --height=$NOTIFICATION_WINDOW_HEIGHT \
@@ -92,17 +132,7 @@ log_warning() {
     fi
 }
 
-show_log_file() {
-    if [[ -f "$LOG_FILE_WITH_LOG_DIR" ]]; then
-        log_info "Log file: '${LOG_FILE_WITH_LOG_DIR}'"
-    else
-        echo "E R R O R - Log file creation failed: '${LOG_FILE_WITH_LOG_DIR}' - E R R O R"
-    fi
-}
-
 log_error() {
-    log "ERROR  " "$1"
-
     if [ "$ENABLE_GUI_FOR_LOGGING" = true ] && check_gui_support; then
         if [[ -f "$LOG_FILE_WITH_LOG_DIR" ]]; then
             yad --error --width=$NOTIFICATION_WINDOW_WIDTH --height=$NOTIFICATION_WINDOW_HEIGHT \
@@ -111,6 +141,6 @@ log_error() {
                 --button="OK:0"
         fi
     fi
-    show_log_file
-    exit 1
+
+    log error "$1"
 }
