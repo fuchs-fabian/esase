@@ -16,7 +16,7 @@ REQUIRED_CONFIG_MODE_DEPENDENCIES="jq"
 CURRENT_SCRIPT_DIR=$(dirname "$(realpath "$0")")
 
 # Default directories
-SOURCES_DIR="$CURRENT_SCRIPT_DIR/sources"
+SOURCES_DIR="$CURRENT_SCRIPT_DIR/utils"
 SCRIPTS_DIR="$CURRENT_SCRIPT_DIR/scripts"
 
 CONFIG_DIR="$CURRENT_SCRIPT_DIR/../config"
@@ -27,7 +27,7 @@ LANG_DIR="$CURRENT_SCRIPT_DIR/lang"
 # Directories from installation
 LOCAL_BIN_DIR="/usr/local/bin"           # script 'esase.sh'
 LOCAL_ETC_DIR="/usr/local/etc/esase"     # dir    'lang'
-LOCAL_SHARE_DIR="/usr/local/share/esase" # dirs   'scripts' & 'sources' | image 'esase-icon.png'
+LOCAL_SHARE_DIR="/usr/local/share/esase" # dirs   'scripts' & 'utils' | image 'esase-icon.png'
 VAR_LIB_DIR="/var/lib/esase"             # dir    'config'
 
 set_directories_based_on_location() {
@@ -36,7 +36,7 @@ set_directories_based_on_location() {
     if [[ "$CURRENT_SCRIPT_DIR" == "$LOCAL_BIN_DIR" ]]; then
         #echo "The current script is located in the correct installation directory."
 
-        SOURCES_DIR="$LOCAL_SHARE_DIR/sources"
+        SOURCES_DIR="$LOCAL_SHARE_DIR/utils"
         SCRIPTS_DIR="$LOCAL_SHARE_DIR/scripts"
 
         CONFIG_DIR="$VAR_LIB_DIR/config"

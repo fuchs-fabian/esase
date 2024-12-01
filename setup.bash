@@ -13,13 +13,13 @@ DEPENDENCIES_TO_BE_INSTALLED="jq yad xrandr" # 'flatpak', 'pkexec' is normally p
 CURRENT_SCRIPT_DIR=$(dirname "$(realpath "$0")")
 
 # Default directories
-SOURCES_DIR="$CURRENT_SCRIPT_DIR/src/sources"
+SOURCES_DIR="$CURRENT_SCRIPT_DIR/src/utils"
 SCRIPTS_DIR="$CURRENT_SCRIPT_DIR/src/scripts"
 
 # Directories for installation
 LOCAL_BIN_DIR="/usr/local/bin"           # script 'esase.sh'
 LOCAL_ETC_DIR="/usr/local/etc/esase"     # dir    'lang'
-LOCAL_SHARE_DIR="/usr/local/share/esase" # dirs   'scripts' & 'sources' | image 'esase-icon.png'
+LOCAL_SHARE_DIR="/usr/local/share/esase" # dirs   'scripts' & 'utils' | image 'esase-icon.png'
 VAR_LIB_DIR="/var/lib/esase"             # dir    'config'
 
 # Directory for .desktop files (current user)
@@ -84,7 +84,7 @@ install_esase() {
     local config_dir="$CURRENT_SCRIPT_DIR/config"
     local lang_dir="$CURRENT_SCRIPT_DIR/src/lang"
     local scripts_dir="$CURRENT_SCRIPT_DIR/src/scripts"
-    local sources_dir="$CURRENT_SCRIPT_DIR/src/sources"
+    local utils_dir="$CURRENT_SCRIPT_DIR/src/utils"
     local desktop_dir="$CURRENT_SCRIPT_DIR/src/desktop"
 
     local icon_file="$desktop_dir/esase-icon.png"
@@ -94,7 +94,7 @@ install_esase() {
         ["$config_dir"]="$VAR_LIB_DIR/config"
         ["$lang_dir"]="$LOCAL_ETC_DIR/lang"
         ["$scripts_dir"]="$LOCAL_SHARE_DIR/scripts"
-        ["$sources_dir"]="$LOCAL_SHARE_DIR/sources"
+        ["$utils_dir"]="$LOCAL_SHARE_DIR/utils"
     )
 
     # Check if 'esase' is already installed
