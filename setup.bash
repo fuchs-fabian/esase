@@ -4,9 +4,7 @@
 # This script (un)installs 'esase'.
 # To uninstall, call this script with the argument 'undo'.
 
-
 DEPENDENCIES_TO_BE_INSTALLED="jq yad xrandr" # 'flatpak', 'pkexec' is normally preinstalled. If not, this must be installed manually!
-
 
 # # # # # # # # # # # #|# # # # # # # # # # # #
 #                 DIRECTORIES                 #
@@ -15,18 +13,17 @@ DEPENDENCIES_TO_BE_INSTALLED="jq yad xrandr" # 'flatpak', 'pkexec' is normally p
 CURRENT_SCRIPT_DIR=$(dirname "$(realpath "$0")")
 
 # Default directories
-SOURCES_DIR="$CURRENT_SCRIPT_DIR/sources"
-SCRIPTS_DIR="$CURRENT_SCRIPT_DIR/scripts"
+SOURCES_DIR="$CURRENT_SCRIPT_DIR/src/sources"
+SCRIPTS_DIR="$CURRENT_SCRIPT_DIR/src/scripts"
 
 # Directories for installation
-LOCAL_BIN_DIR="/usr/local/bin"              # script 'esase.sh'
-LOCAL_ETC_DIR="/usr/local/etc/esase"        # dir    'lang'
-LOCAL_SHARE_DIR="/usr/local/share/esase"    # dirs   'scripts' & 'sources' | image 'esase-icon.png'
-VAR_LIB_DIR="/var/lib/esase"                # dir    'config'
+LOCAL_BIN_DIR="/usr/local/bin"           # script 'esase.sh'
+LOCAL_ETC_DIR="/usr/local/etc/esase"     # dir    'lang'
+LOCAL_SHARE_DIR="/usr/local/share/esase" # dirs   'scripts' & 'sources' | image 'esase-icon.png'
+VAR_LIB_DIR="/var/lib/esase"             # dir    'config'
 
 # Directory for .desktop files (current user)
 DESKTOP_FILES_DIR="$HOME/.local/share/applications"
-
 
 # # # # # # # # # # # #|# # # # # # # # # # # #
 #                   SOURCES                   #
@@ -39,16 +36,17 @@ SOURCE_FILES=(
 )
 
 for source_file in "${SOURCE_FILES[@]}"; do
-    source "$SOURCES_DIR/$source_file" || { echo "Error: Could not source '$source_file' for '$0'."; exit 1; }
+    source "$SOURCES_DIR/$source_file" || {
+        echo "Error: Could not source '$source_file' for '$0'."
+        exit 1
+    }
 done
-
 
 # # # # # # # # # # # #|# # # # # # # # # # # #
 #                   SCRIPTS                   #
 # # # # # # # # # # # #|# # # # # # # # # # # #
 
 DISTRO_BASED_ACTIONS_SCRIPT="$SCRIPTS_DIR/distro_based_actions.sh"
-
 
 # # # # # # # # # # # #|# # # # # # # # # # # #
 #         OVERWRITING LOGGING VARIABLES       #
@@ -57,13 +55,12 @@ DISTRO_BASED_ACTIONS_SCRIPT="$SCRIPTS_DIR/distro_based_actions.sh"
 ENABLE_DEBUG_LOGGING=false
 ENABLE_GUI_FOR_LOGGING=false
 
-
 # # # # # # # # # # # #|# # # # # # # # # # # #
 #             INSTALL FUNCTIONALITY           #
 # # # # # # # # # # # #|# # # # # # # # # # # #
 
 copy_desktop_file() {
-    local desktop_dir="$CURRENT_SCRIPT_DIR/desktop"
+    local desktop_dir="$CURRENT_SCRIPT_DIR/src/desktop"
     local desktop_file="$desktop_dir/esase.desktop"
     local destination="$DESKTOP_FILES_DIR/esase.desktop"
 
@@ -82,13 +79,13 @@ copy_desktop_file() {
 }
 
 install_esase() {
-    local script_file="$CURRENT_SCRIPT_DIR/esase.sh"
+    local script_file="$CURRENT_SCRIPT_DIR/src/esase.sh"
 
     local config_dir="$CURRENT_SCRIPT_DIR/config"
-    local lang_dir="$CURRENT_SCRIPT_DIR/lang"
-    local scripts_dir="$CURRENT_SCRIPT_DIR/scripts"
-    local sources_dir="$CURRENT_SCRIPT_DIR/sources"
-    local desktop_dir="$CURRENT_SCRIPT_DIR/desktop"
+    local lang_dir="$CURRENT_SCRIPT_DIR/src/lang"
+    local scripts_dir="$CURRENT_SCRIPT_DIR/src/scripts"
+    local sources_dir="$CURRENT_SCRIPT_DIR/src/sources"
+    local desktop_dir="$CURRENT_SCRIPT_DIR/src/desktop"
 
     local icon_file="$desktop_dir/esase-icon.png"
 
@@ -166,7 +163,6 @@ install_esase() {
     log_info "Installation complete."
 }
 
-
 # # # # # # # # # # # #|# # # # # # # # # # # #
 #            UNINSTALL FUNCTIONALITY          #
 # # # # # # # # # # # #|# # # # # # # # # # # #
@@ -233,7 +229,6 @@ uninstall_esase() {
     log_info "Uninstallation complete."
 }
 
-
 # # # # # # # # # # # #|# # # # # # # # # # # #
 #           PROMPTS USER FOR YES/NO           #
 # # # # # # # # # # # #|# # # # # # # # # # # #
@@ -245,12 +240,11 @@ prompt_user() {
 
     read -r -p "$prompt [y/n]: " response
     case "$response" in
-        [Yy]* ) return 0 ;;  # Yes
-        [Nn]* ) return 1 ;;  # No
-        * ) log_warning "Please answer yes or no." && return 1 ;;
+    [Yy]*) return 0 ;; # Yes
+    [Nn]*) return 1 ;; # No
+    *) log_warning "Please answer yes or no." && return 1 ;;
     esac
 }
-
 
 # # # # # # # # # # # #|# # # # # # # # # # # #
 #                    LOGIC                    #
@@ -266,47 +260,47 @@ show_log_file
 check_scripts_and_make_scripts_executable "$DISTRO_BASED_ACTIONS_SCRIPT" || log_error "Validation for scripts and their executability failed!"
 
 case "$1" in
-    undo )
-        log_info "Uninstall 'esase'..."
+uninstall)
+    log_info "Uninstall 'esase'..."
 
-        log_debug "Home directory: '$HOME'"
+    log_debug "Home directory: '$HOME'"
 
-        # Define backup directory
-        BACKUP_CONFIG_DIR="$HOME/esase_config_backup/$(date +"%Y-%m-%d_%H-%M-%S")"
+    # Define backup directory
+    BACKUP_CONFIG_DIR="$HOME/esase_config_backup/$(date +"%Y-%m-%d_%H-%M-%S")"
 
-        # Create backup directory if it doesn't exist
-        log_info "Creating backup directory '$BACKUP_CONFIG_DIR'."
-        mkdir -p "$BACKUP_CONFIG_DIR" || log_error "Failed to create backup directory '$BACKUP_CONFIG_DIR'."
+    # Create backup directory if it doesn't exist
+    log_info "Creating backup directory '$BACKUP_CONFIG_DIR'."
+    mkdir -p "$BACKUP_CONFIG_DIR" || log_error "Failed to create backup directory '$BACKUP_CONFIG_DIR'."
 
-        # Backup to the newly created backup directory
-        log_info "Backing up '$VAR_LIB_DIR/config' to '$BACKUP_CONFIG_DIR'."
-        sudo cp -r "$VAR_LIB_DIR/config" "$BACKUP_CONFIG_DIR" && log_info "Backup completed successfully. You can find your 'esase' backup under '$BACKUP_CONFIG_DIR'" || log_error "Backup failed."
+    # Backup to the newly created backup directory
+    log_info "Backing up '$VAR_LIB_DIR/config' to '$BACKUP_CONFIG_DIR'."
+    sudo cp -r "$VAR_LIB_DIR/config" "$BACKUP_CONFIG_DIR" && log_info "Backup completed successfully. You can find your 'esase' backup under '$BACKUP_CONFIG_DIR'" || log_error "Backup failed."
 
-        # Change ownership of the backup directory to the current user
-        log_info "Changing ownership of '$BACKUP_CONFIG_DIR' to the current user."
-        sudo chown -R "$USER:$USER" "$BACKUP_CONFIG_DIR" || log_error "Failed to change ownership of '$BACKUP_CONFIG_DIR'."
+    # Change ownership of the backup directory to the current user
+    log_info "Changing ownership of '$BACKUP_CONFIG_DIR' to the current user."
+    sudo chown -R "$USER:$USER" "$BACKUP_CONFIG_DIR" || log_error "Failed to change ownership of '$BACKUP_CONFIG_DIR'."
 
-        uninstall_esase
+    uninstall_esase
 
-        # Prompt user for dependency removal
-        if prompt_user "Do you want to remove the following dependencies: $DEPENDENCIES_TO_BE_INSTALLED?"; then
-            sudo "$DISTRO_BASED_ACTIONS_SCRIPT" -d "$ENABLE_DEBUG_LOGGING" -a remove -r "$DEPENDENCIES_TO_BE_INSTALLED" || log_error "Uninstallation of dependencies ($DEPENDENCIES_TO_BE_INSTALLED) failed!"
-        else
-            log_info "Skipping removal of dependencies."
-        fi
-        ;;
-    * )
-        log_info "Install 'esase'..."
+    # Prompt user for dependency removal
+    if prompt_user "Do you want to remove the following dependencies: $DEPENDENCIES_TO_BE_INSTALLED?"; then
+        sudo "$DISTRO_BASED_ACTIONS_SCRIPT" -d "$ENABLE_DEBUG_LOGGING" -a remove -r "$DEPENDENCIES_TO_BE_INSTALLED" || log_error "Uninstallation of dependencies ($DEPENDENCIES_TO_BE_INSTALLED) failed!"
+    else
+        log_info "Skipping removal of dependencies."
+    fi
+    ;;
+install | *)
+    log_info "Install 'esase'..."
 
-        # Prompt user for dependency install
-        if prompt_user "Do you want to install the required dependencies: $DEPENDENCIES_TO_BE_INSTALLED?"; then
-            sudo "$DISTRO_BASED_ACTIONS_SCRIPT" -d "$ENABLE_DEBUG_LOGGING" -a install -i "$DEPENDENCIES_TO_BE_INSTALLED" || log_error "Installation of required dependencies ($DEPENDENCIES_TO_BE_INSTALLED) failed!"
-        else
-            log_error "Installation aborted!"
-        fi
+    # Prompt user for dependency install
+    if prompt_user "Do you want to install the required dependencies: $DEPENDENCIES_TO_BE_INSTALLED?"; then
+        sudo "$DISTRO_BASED_ACTIONS_SCRIPT" -d "$ENABLE_DEBUG_LOGGING" -a install -i "$DEPENDENCIES_TO_BE_INSTALLED" || log_error "Installation of required dependencies ($DEPENDENCIES_TO_BE_INSTALLED) failed!"
+    else
+        log_error "Installation aborted!"
+    fi
 
-        install_esase
-        ;;
+    install_esase
+    ;;
 esac
 
 chmod -x "$DISTRO_BASED_ACTIONS_SCRIPT"

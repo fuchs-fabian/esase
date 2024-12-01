@@ -99,7 +99,7 @@ It is a Bash script that can have a strong impact on the system. It is therefore
 
 ### Installation
 
-Clone the repository or download the corresponding release and execute the script [`install-esase.sh`](https://github.com/fuchs-fabian/esase/blob/main/install-esase.sh).
+Clone the repository or download the corresponding release and execute the script [`setup.bash`](./setup.bash).
 
 You must first make this script executable!
 
@@ -110,7 +110,7 @@ Right-click on the script and then on Properties:
 Or alternatively in the console:
 
 ```bash
-chmod +x ./install-esase.sh
+chmod +x ./setup.bash
 ```
 
 Then execute the script!
@@ -122,7 +122,7 @@ Right-click on the script and then:
 Or alternatively in the console:
 
 ```bash
-./install-esase.sh
+./setup.bash
 ```
 
 > An app icon will then also appear in your app menu. If you click on this, gui mode will be used automatically.
@@ -201,14 +201,10 @@ Usage: esase [-h] [-g] [-d] [-c CONFIG_FILE] [-l LANGUAGE] [-i "PACKAGE_1 PACKAG
 
 ## Uninstallation
 
-Execute the script [`uninstall-esase.sh`](https://github.com/fuchs-fabian/esase/blob/main/uninstall-esase.sh).
-
-Note that this script must be made executable beforehand. The procedure is very similar to the installation.
-
-And because it is so similar to the installation, you can simply make the install-esase.sh script executable and then simply:
+Simply run the script [`setup.bash`](./setup.bash) with the `uninstall` argument.
 
 ```bash
-./install-esase.sh undo
+./setup.bash uninstall
 ```
 
 > When uninstalling, the configuration files are automatically copied to the current home directory so that you can reuse them. The path where you can find it will be indicated.
