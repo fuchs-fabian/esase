@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # DESCRIPTION:
 # This source enables the config mode (execution without GUI) for 'esase'.

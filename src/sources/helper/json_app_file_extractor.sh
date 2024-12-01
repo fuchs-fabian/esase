@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # DESCRIPTION:
 # This source helps with the extraction for the 'app_file_editor.sh'.

@@ -1,8 +1,7 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # DESCRIPTION:
 # This source helps with the use of GUI (popup) interactions.
-
 
 # # # # # # # # # # # #|# # # # # # # # # # # #
 #      EXECUTING SUDO COMMANDS WITH GUI       #
@@ -14,7 +13,6 @@ run_with_sudo() {
     log_debug "Run: 'sudo $command'"
     pkexec bash -c "$command"
 }
-
 
 # # # # # # # # # # # #|# # # # # # # # # # # #
 #      CHECKS IF POPUP HAS BEEN CANCELED      #

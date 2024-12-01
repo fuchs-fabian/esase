@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # DESCRIPTION:
 # This script edits an app file.

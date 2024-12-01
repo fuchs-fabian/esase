@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # DESCRIPTION:
 # This source enables the logging of a bash script.

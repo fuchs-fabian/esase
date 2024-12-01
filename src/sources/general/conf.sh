@@ -1,8 +1,7 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # DESCRIPTION:
 # This source makes it possible to read the '.conf' files.
-
 
 # # # # # # # # # # # #|# # # # # # # # # # # #
 #           GET CONFIGURATION VALUES          #
@@ -18,7 +17,7 @@ get_conf_value() {
 
     # Remove surrounding quotes
     value=$(echo "$value" | sed 's/^"\(.*\)"$/\1/')
-    
+
     # Check if the value was found
     if [[ -z $value ]]; then
         log_error "Key '$key' not found in configuration file!"
