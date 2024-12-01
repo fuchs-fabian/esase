@@ -4,12 +4,10 @@
 # This script is 'esase'.
 # Read the README.md for more information.
 
-
 REQUIRED_PREINSTALLED_DEPENDENCIES="flatpak pkexec"
 
 REQUIRED_GUI_MODE_DEPENDENCIES="jq yad xrandr"
 REQUIRED_CONFIG_MODE_DEPENDENCIES="jq"
-
 
 # # # # # # # # # # # #|# # # # # # # # # # # #
 #                 DIRECTORIES                 #
@@ -21,16 +19,16 @@ CURRENT_SCRIPT_DIR=$(dirname "$(realpath "$0")")
 SOURCES_DIR="$CURRENT_SCRIPT_DIR/sources"
 SCRIPTS_DIR="$CURRENT_SCRIPT_DIR/scripts"
 
-CONFIG_DIR="$CURRENT_SCRIPT_DIR/config"
+CONFIG_DIR="$CURRENT_SCRIPT_DIR/../config"
 APP_FILES_DIR="$CONFIG_DIR/app_files"
 
 LANG_DIR="$CURRENT_SCRIPT_DIR/lang"
 
 # Directories from installation
-LOCAL_BIN_DIR="/usr/local/bin"              # script 'esase.sh'
-LOCAL_ETC_DIR="/usr/local/etc/esase"        # dir    'lang'
-LOCAL_SHARE_DIR="/usr/local/share/esase"    # dirs   'scripts' & 'sources' | image 'esase-icon.png'
-VAR_LIB_DIR="/var/lib/esase"                # dir    'config'
+LOCAL_BIN_DIR="/usr/local/bin"           # script 'esase.sh'
+LOCAL_ETC_DIR="/usr/local/etc/esase"     # dir    'lang'
+LOCAL_SHARE_DIR="/usr/local/share/esase" # dirs   'scripts' & 'sources' | image 'esase-icon.png'
+VAR_LIB_DIR="/var/lib/esase"             # dir    'config'
 
 set_directories_based_on_location() {
     #echo "CURRENT_SCRIPT_DIR: '$CURRENT_SCRIPT_DIR'"
@@ -58,7 +56,6 @@ set_directories_based_on_location() {
 
 set_directories_based_on_location
 
-
 # # # # # # # # # # # #|# # # # # # # # # # # #
 #                   SOURCES                   #
 # # # # # # # # # # # #|# # # # # # # # # # # #
@@ -77,9 +74,11 @@ SOURCE_FILES=(
 )
 
 for source_file in "${SOURCE_FILES[@]}"; do
-    source "$SOURCES_DIR/$source_file" || { echo "Error: Could not source '$source_file' for '$0'"; exit 1; }
+    source "$SOURCES_DIR/$source_file" || {
+        echo "Error: Could not source '$source_file' for '$0'"
+        exit 1
+    }
 done
-
 
 # # # # # # # # # # # #|# # # # # # # # # # # #
 #                   SCRIPTS                   #
@@ -88,7 +87,6 @@ done
 DISTRO_BASED_ACTIONS_SCRIPT="$SCRIPTS_DIR/distro_based_actions.sh"
 APP_FILE_EDITOR_SCRIPT="$SCRIPTS_DIR/app_file_editor.sh"
 APP_INSTALLER_SCRIPT="$SCRIPTS_DIR/app_installer.sh"
-
 
 # # # # # # # # # # # #|# # # # # # # # # # # #
 #                    FILES                    #
@@ -100,7 +98,6 @@ APT_APPS_FILE="$APP_FILES_DIR/apt.json"
 DNF_APPS_FILE="$APP_FILES_DIR/dnf.json"
 FLATPAK_APPS_FILE="$APP_FILES_DIR/flatpak.json"
 
-
 # # # # # # # # # # # #|# # # # # # # # # # # #
 #                 PREPARATIONS                #
 # # # # # # # # # # # #|# # # # # # # # # # # #
@@ -111,7 +108,6 @@ log_debug "The following Linux distribution is used to perform actions: '$DISTRO
 check_dependencies $REQUIRED_PREINSTALLED_DEPENDENCIES
 
 check_scripts_and_make_scripts_executable "$DISTRO_BASED_ACTIONS_SCRIPT" "$APP_FILE_EDITOR_SCRIPT" "$APP_INSTALLER_SCRIPT" || log_error "Validation for scripts and their executability failed!"
-
 
 # # # # # # # # # # # #|# # # # # # # # # # # #
 #                   GETOPTS                   #
@@ -130,69 +126,67 @@ PACKAGES_TO_REMOVE=""
 
 while getopts ":hdgc:l:i:ur:" opt; do
     case ${opt} in
-        h ) 
-            echo "Usage: $SIMPLE_SCRIPT_NAME [-h] [-g] [-d] [-c CONFIG_FILE] [-l LANGUAGE] [-i \"PACKAGE_1 PACKAGE_2 ...\"] [-u] [-r \"PACKAGE_1 PACKAGE_2 ...\"]"
-            echo "  -h                      Show help"
-            echo "  -d                      Enables debug logging"
-            echo "  -g                      Use GUI"            # TODO: The config.json is currently ignored for this purpose
-            echo "  -c CONFIG_FILE          Specify a custom configuration file to run actions automatically"
-            echo "                          (Default: $DEFAULT_CONFIG_FILE; Ignored if \"-i\", \"-u\" or \"-r\" is selected)"
-            echo "  -l LANGUAGE             Specify language"   # TODO: Support for console mode and logging
-            echo "                          (en or de; Default: System language)"
-            echo "  -i PACKAGES_TO_INSTALL  Specify packages to install"
-            echo "                          (only used if \"-g\" was not selected)"
-            echo "  -u                      Updates all - packages, flatpaks, npm, etc."
-            echo "                          (only used if \"-g\" was not selected)"
-            echo "  -r PACKAGES_TO_REMOVE   Specify packages to remove"
-            echo "                          (only used if \"-g\" was not selected)"
-            exit 0
-            ;;
-        d ) 
-            log_debug "'-d' selected"
-            # Overwrites the variable in 'logger.sh'
-            ENABLE_DEBUG_LOGGING=true
-            ;;
-        g ) 
-            log_debug "'-g' selected"
-            GUI=true
-            ;;
-        c ) 
-            log_debug "'-c' selected: '$OPTARG'"
-            CONFIG_FILE="${OPTARG}"
-            ;;
-        l ) 
-            log_debug "'-l' selected: '$OPTARG'"
-            LANGUAGE="${OPTARG}"
-            ;;
-        i ) 
-            log_debug "'-i' selected: '$OPTARG'"
-            PACKAGES_TO_INSTALL="${OPTARG}"
-            ;;
-        u ) 
-            log_debug "'-u' selected"
-            UPDATE_ALL_FLAG=true
-            ;;
-        r ) 
-            log_debug "'-r' selected: '$OPTARG'"
-            PACKAGES_TO_REMOVE="${OPTARG}"
-            ;;
-        \? )
-            log_error "Invalid option: -$OPTARG"
-            ;;
-        : )
-            log_error "Option -$OPTARG requires an argument!"
-            ;;
+    h)
+        echo "Usage: $SIMPLE_SCRIPT_NAME [-h] [-g] [-d] [-c CONFIG_FILE] [-l LANGUAGE] [-i \"PACKAGE_1 PACKAGE_2 ...\"] [-u] [-r \"PACKAGE_1 PACKAGE_2 ...\"]"
+        echo "  -h                      Show help"
+        echo "  -d                      Enables debug logging"
+        echo "  -g                      Use GUI" # TODO: The config.json is currently ignored for this purpose
+        echo "  -c CONFIG_FILE          Specify a custom configuration file to run actions automatically"
+        echo "                          (Default: $DEFAULT_CONFIG_FILE; Ignored if \"-i\", \"-u\" or \"-r\" is selected)"
+        echo "  -l LANGUAGE             Specify language" # TODO: Support for console mode and logging
+        echo "                          (en or de; Default: System language)"
+        echo "  -i PACKAGES_TO_INSTALL  Specify packages to install"
+        echo "                          (only used if \"-g\" was not selected)"
+        echo "  -u                      Updates all - packages, flatpaks, npm, etc."
+        echo "                          (only used if \"-g\" was not selected)"
+        echo "  -r PACKAGES_TO_REMOVE   Specify packages to remove"
+        echo "                          (only used if \"-g\" was not selected)"
+        exit 0
+        ;;
+    d)
+        log_debug "'-d' selected"
+        # Overwrites the variable in 'logger.sh'
+        ENABLE_DEBUG_LOGGING=true
+        ;;
+    g)
+        log_debug "'-g' selected"
+        GUI=true
+        ;;
+    c)
+        log_debug "'-c' selected: '$OPTARG'"
+        CONFIG_FILE="${OPTARG}"
+        ;;
+    l)
+        log_debug "'-l' selected: '$OPTARG'"
+        LANGUAGE="${OPTARG}"
+        ;;
+    i)
+        log_debug "'-i' selected: '$OPTARG'"
+        PACKAGES_TO_INSTALL="${OPTARG}"
+        ;;
+    u)
+        log_debug "'-u' selected"
+        UPDATE_ALL_FLAG=true
+        ;;
+    r)
+        log_debug "'-r' selected: '$OPTARG'"
+        PACKAGES_TO_REMOVE="${OPTARG}"
+        ;;
+    \?)
+        log_error "Invalid option: -$OPTARG"
+        ;;
+    :)
+        log_error "Option -$OPTARG requires an argument!"
+        ;;
     esac
 done
-shift $((OPTIND -1))
-
+shift $((OPTIND - 1))
 
 # # # # # # # # # # # #|# # # # # # # # # # # #
 #                   LANGUAGE                  #
 # # # # # # # # # # # #|# # # # # # # # # # # #
 
 set_language
-
 
 # # # # # # # # # # # #|# # # # # # # # # # # #
 #                    LOGIC                    #

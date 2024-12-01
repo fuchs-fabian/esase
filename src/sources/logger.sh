@@ -4,13 +4,11 @@
 # This source enables the logging of a bash script.
 # It is also possible to use popups for logging if the 'yad' package is installed.
 
+ENABLE_ADVANCED_LOGGING=true # Can be overwritten without problems
+ENABLE_DEBUG_LOGGING=false   # Can be overwritten without problems
+ENABLE_GUI_FOR_LOGGING=true  # Can be overwritten without problems
 
-ENABLE_ADVANCED_LOGGING=true    # Can be overwritten without problems
-ENABLE_DEBUG_LOGGING=false      # Can be overwritten without problems
-ENABLE_GUI_FOR_LOGGING=true     # Can be overwritten without problems
-
-LOG_FILE_PATH="/tmp"            # Can be overwritten, but is not recommended
-
+LOG_FILE_PATH="/tmp" # Can be overwritten, but is not recommended
 
 # # # # # # # # # # # #|# # # # # # # # # # # #
 #              SCRIPT INFORMATION             #
@@ -21,14 +19,12 @@ SCRIPT_NAME="$0"
 SIMPLE_SCRIPT_NAME=$(basename "$SCRIPT_NAME")
 SIMPLE_SCRIPT_NAME_WITHOUT_FILE_EXTENSION="${SIMPLE_SCRIPT_NAME%.*}"
 
-
 # # # # # # # # # # # #|# # # # # # # # # # # #
 #           NOTIFICATION POPUP SIZES          #
 # # # # # # # # # # # #|# # # # # # # # # # # #
 
 NOTIFICATION_WINDOW_WIDTH=500
 NOTIFICATION_WINDOW_HEIGHT=100
-
 
 # # # # # # # # # # # #|# # # # # # # # # # # #
 #              LOGGING DIRECTORIES            #
@@ -37,7 +33,6 @@ NOTIFICATION_WINDOW_HEIGHT=100
 LOG_DIR="${LOG_FILE_PATH}/${SIMPLE_SCRIPT_NAME_WITHOUT_FILE_EXTENSION}_logs/"
 LOG_FILE="$(date +"%Y-%m-%d_%H-%M-%S")_log_${SIMPLE_SCRIPT_NAME_WITHOUT_FILE_EXTENSION}.txt"
 LOG_FILE_WITH_LOG_DIR="${LOG_DIR}${LOG_FILE}"
-
 
 # # # # # # # # # # # #|# # # # # # # # # # # #
 #             LOGGING FUNCTIONALITY           #
@@ -58,9 +53,9 @@ log() {
 
     if [[ -n "$message" ]]; then
         while IFS= read -r line; do
-            echo "$(date +"%d.%m.%Y %H:%M:%S") - $level - $line" >> "$LOG_FILE_WITH_LOG_DIR"
+            echo "$(date +"%d.%m.%Y %H:%M:%S") - $level - $line" >>"$LOG_FILE_WITH_LOG_DIR"
             echo "  $level$script_info - $line"
-        done <<< "$message"
+        done <<<"$message"
     fi
 }
 
@@ -71,7 +66,7 @@ log_debug() {
 }
 
 check_gui_support() {
-    if ! command -v yad &> /dev/null; then
+    if ! command -v yad &>/dev/null; then
         log_debug "'yad' is not installed. Please install to use GUI popups."
         return 1
     fi

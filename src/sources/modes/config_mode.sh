@@ -3,7 +3,6 @@
 # DESCRIPTION:
 # This source enables the config mode (execution without GUI) for 'esase'.
 
-
 # # # # # # # # # # # #|# # # # # # # # # # # #
 #                 CONFIG MODE                 #
 # # # # # # # # # # # #|# # # # # # # # # # # #
@@ -21,18 +20,18 @@ run_config_mode() {
 
     if [ "$(extract_flag_from_field "$CONFIG_FILE" "install_apps")" == "true" ]; then
         case "$DISTRO_NAME" in
-            ubuntu|debian )
-                sudo "$APP_INSTALLER_SCRIPT" -d "$ENABLE_DEBUG_LOGGING" -f "$APT_APPS_FILE" -c "sudo apt install"
-                ;;
-            fedora )
-                sudo "$APP_INSTALLER_SCRIPT" -d "$ENABLE_DEBUG_LOGGING" -f "$DNF_APPS_FILE" -c "sudo dnf install"
-                ;;
+        ubuntu | debian)
+            sudo "$APP_INSTALLER_SCRIPT" -d "$ENABLE_DEBUG_LOGGING" -f "$APT_APPS_FILE" -c "sudo apt install"
+            ;;
+        fedora)
+            sudo "$APP_INSTALLER_SCRIPT" -d "$ENABLE_DEBUG_LOGGING" -f "$DNF_APPS_FILE" -c "sudo dnf install"
+            ;;
         esac
     fi
 
     if [ "$(extract_flag_from_field "$CONFIG_FILE" "install_flatpak_apps")" == "true" ]; then
         sudo "$APP_INSTALLER_SCRIPT" -d "$ENABLE_DEBUG_LOGGING" -f "$FLATPAK_APPS_FILE" -c "flatpak install flathub"
-        
+
         echo
         flatpak list
         echo

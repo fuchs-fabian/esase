@@ -3,7 +3,6 @@
 # DESCRIPTION:
 # This source helps with the extraction for the config mode of 'esase.sh'.
 
-
 extract_flag_from_field() {
     local config_file=$1
     local field=$2

@@ -5,7 +5,6 @@
 # The files (<lang>.conf) for the languages can be found in the 'esase' main directory under 'lang'.
 # For this source, the source 'sources/general/conf.sh' must be included beforehand
 
-
 # # # # # # # # # # # #|# # # # # # # # # # # #
 #         SCRIPT OVERLAPPING VARIABLES        #
 # # # # # # # # # # # #|# # # # # # # # # # # #
@@ -13,7 +12,6 @@
 TXT_SELECT_ACTION_PROMPT=$(get_lang_specific_text "select_action_prompt")
 TXT_SUCCESS=$(get_lang_specific_text "success")
 TXT_COL_ACTION=$(get_lang_specific_text "col_action")
-
 
 # # # # # # # # # # # #|# # # # # # # # # # # #
 #        'ESASE' SPECIFIC VARIABLES           #
@@ -39,7 +37,6 @@ TXT_DNF_APP_FILE_SELECTION=$(get_lang_specific_text "dnf_app_file_selection")
 TXT_FLATPAK_APP_FILE_SELECTION=$(get_lang_specific_text "flatpak_app_file_selection")
 
 TXT_COL_APP_FILE=$(get_lang_specific_text "col_app_file")
-
 
 # # # # # # # # # # # #|# # # # # # # # # # # #
 #    'APP_FILE_EDITOR' SPECIFIC VARIABLES     #

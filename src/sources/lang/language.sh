@@ -3,7 +3,6 @@
 # DESCRIPTION:
 # This source helps to support different languages.
 
-
 SUPPORTED_LANGUAGES=("en" "de")
 
 LANGUAGE=""
@@ -48,5 +47,8 @@ set_language() {
 
     log_debug "Using language configuration: '$LANGUAGE_CONF'"
 
-    source "$SOURCES_DIR/lang/dictionary.sh" || { echo "Error: Could not source 'dictionary.sh' for '$0'."; exit 1; }
+    source "$SOURCES_DIR/lang/dictionary.sh" || {
+        echo "Error: Could not source 'dictionary.sh' for '$0'."
+        exit 1
+    }
 }

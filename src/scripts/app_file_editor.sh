@@ -3,7 +3,6 @@
 # DESCRIPTION:
 # This script edits an app file.
 
-
 # # # # # # # # # # # #|# # # # # # # # # # # #
 #                 DIRECTORIES                 #
 # # # # # # # # # # # #|# # # # # # # # # # # #
@@ -11,14 +10,14 @@
 CURRENT_SCRIPT_DIR=$(dirname "$(realpath "$0")")
 
 # Default directories
-SOURCES_DIR="$CURRENT_SCRIPT_DIR/../sources"
-LANG_DIR="$CURRENT_SCRIPT_DIR/../lang"
+SOURCES_DIR="$CURRENT_SCRIPT_DIR/../src/sources"
+LANG_DIR="$CURRENT_SCRIPT_DIR/../src/lang"
 
 # Directories from installation
-LOCAL_BIN_DIR="/usr/local/bin"              # script 'esase.sh'
-LOCAL_ETC_DIR="/usr/local/etc/esase"        # dir    'lang'
-LOCAL_SHARE_DIR="/usr/local/share/esase"    # dirs   'scripts' & 'sources' | image 'esase-icon.png'
-VAR_LIB_DIR="/var/lib/esase"                # dir    'config'
+LOCAL_BIN_DIR="/usr/local/bin"           # script 'esase.sh'
+LOCAL_ETC_DIR="/usr/local/etc/esase"     # dir    'lang'
+LOCAL_SHARE_DIR="/usr/local/share/esase" # dirs   'scripts' & 'sources' | image 'esase-icon.png'
+VAR_LIB_DIR="/var/lib/esase"             # dir    'config'
 
 set_directories_based_on_location() {
     #echo "CURRENT_SCRIPT_DIR: '$CURRENT_SCRIPT_DIR'"
@@ -36,7 +35,6 @@ set_directories_based_on_location() {
 
 set_directories_based_on_location
 
-
 # # # # # # # # # # # #|# # # # # # # # # # # #
 #                   SOURCES                   #
 # # # # # # # # # # # #|# # # # # # # # # # # #
@@ -52,16 +50,17 @@ SOURCE_FILES=(
 )
 
 for source_file in "${SOURCE_FILES[@]}"; do
-    source "$SOURCES_DIR/$source_file" || { echo "Error: Could not source '$source_file' for '$0'."; exit 1; }
+    source "$SOURCES_DIR/$source_file" || {
+        echo "Error: Could not source '$source_file' for '$0'."
+        exit 1
+    }
 done
-
 
 # # # # # # # # # # # #|# # # # # # # # # # # #
 #                PREPARATIONS                 #
 # # # # # # # # # # # #|# # # # # # # # # # # #
 
 check_dependencies jq yad
-
 
 # # # # # # # # # # # #|# # # # # # # # # # # #
 #                   GETOPTS                   #
@@ -71,36 +70,36 @@ APP_FILE=""
 
 while getopts ":hd:l:f:" opt; do
     case ${opt} in
-        h )
-            echo "Usage: $SIMPLE_SCRIPT_NAME [-h] [-d true/false] [-l LANGUAGE] [-f APP_FILE]"
-            echo "  -h                 Show help"
-            echo "  -d true/false      Enables debug logging"
-            echo "  -l LANGUAGE        Specify language (en or de; Default: en)"
-            echo "  -f APP_FILE        E.g. '<path-to-app-file>/apt.json'"
-            exit 0
-            ;;
-        d ) 
-            log_debug "'-d' selected: '$OPTARG'"
-            # Overwrites the variable in 'logger.sh'
-            ENABLE_DEBUG_LOGGING="${OPTARG}"
-            ;;
-        l )
-            log_debug "'-l' selected: '$OPTARG'"
-            LANGUAGE="${OPTARG}"
-            ;;
-        f )
-            log_debug "'-f' selected: '$OPTARG'"
-            APP_FILE="${OPTARG}"
-            ;;
-        \? )
-            log_error "Invalid option: -$OPTARG"
-            ;;
-        : )
-            log_error "Option -$OPTARG requires an argument!"
-            ;;
+    h)
+        echo "Usage: $SIMPLE_SCRIPT_NAME [-h] [-d true/false] [-l LANGUAGE] [-f APP_FILE]"
+        echo "  -h                 Show help"
+        echo "  -d true/false      Enables debug logging"
+        echo "  -l LANGUAGE        Specify language (en or de; Default: en)"
+        echo "  -f APP_FILE        E.g. '<path-to-app-file>/apt.json'"
+        exit 0
+        ;;
+    d)
+        log_debug "'-d' selected: '$OPTARG'"
+        # Overwrites the variable in 'logger.sh'
+        ENABLE_DEBUG_LOGGING="${OPTARG}"
+        ;;
+    l)
+        log_debug "'-l' selected: '$OPTARG'"
+        LANGUAGE="${OPTARG}"
+        ;;
+    f)
+        log_debug "'-f' selected: '$OPTARG'"
+        APP_FILE="${OPTARG}"
+        ;;
+    \?)
+        log_error "Invalid option: -$OPTARG"
+        ;;
+    :)
+        log_error "Option -$OPTARG requires an argument!"
+        ;;
     esac
 done
-shift $((OPTIND -1))
+shift $((OPTIND - 1))
 
 if [[ -z "$APP_FILE" ]]; then
     log_error "No app file specified!"
@@ -108,20 +107,17 @@ fi
 
 log_debug "Language used: '$LANGUAGE'"
 
-
 # # # # # # # # # # # #|# # # # # # # # # # # #
 #                WINDOW SETTINGS              #
 # # # # # # # # # # # #|# # # # # # # # # # # #
 
 set_popup_size
 
-
 # # # # # # # # # # # #|# # # # # # # # # # # #
 #                   LANGUAGE                  #
 # # # # # # # # # # # #|# # # # # # # # # # # #
 
 set_language
-
 
 # # # # # # # # # # # #|# # # # # # # # # # # #
 #                  APP ACTIONS                #
@@ -141,7 +137,7 @@ popup_select_apps_for_installation() {
         fi
         app_entry_list+=("$entry_index" "$install_checked" "$app_name" "$app_alias" "$app_description" "$app_category")
         ((entry_index++))
-    done <<< "$(extract_all_app_entries "$app_file")"
+    done <<<"$(extract_all_app_entries "$app_file")"
 
     local gui_result=$(yad --list --width=$WINDOW_WIDTH --height=$WINDOW_HEIGHT --separator="|" \
         --title="$screen_name" \
@@ -169,8 +165,8 @@ popup_select_apps_for_installation() {
             --arg name "$app_name" \
             --argjson install "$install_value" \
             '(.[$category][] | select(.name == $name)).install = $install' \
-            "$app_file" > tmp.$$.json && mv tmp.$$.json "$app_file"
-    done <<< "$gui_result"
+            "$app_file" >tmp.$$.json && mv tmp.$$.json "$app_file"
+    done <<<"$gui_result"
 
     log_info "$screen_name - Updated apps for installation."
     popup_select_apps_for_installation "$app_file"
@@ -193,7 +189,7 @@ popup_add_app() {
         --field="${TXT_COL_CATEGORY}":CB "$dropdown_options")
 
     if ! popup_is_canceled "$screen_name" "$gui_result"; then
-        IFS='|' read -r name alias install description category <<< "$gui_result"
+        IFS='|' read -r name alias install description category <<<"$gui_result"
 
         if [[ -z "$name" ]]; then
             log_warning "$screen_name - No name provided. No entry added."
@@ -217,7 +213,7 @@ popup_add_app() {
                 install: ($install | test("true") // false),
                 description: ($description | select(length > 0) // null)
             }]' \
-            "$app_file" > tmp.$$.json && mv tmp.$$.json "$app_file"
+            "$app_file" >tmp.$$.json && mv tmp.$$.json "$app_file"
 
         log_info "$screen_name - Added new app: $name"
     fi
@@ -235,7 +231,7 @@ popup_edit_apps() {
     while IFS='|' read -r app_name app_alias app_install app_description app_category; do
         app_entry_list+=("$entry_index" "$app_name" "$app_alias" "$app_install" "$app_description" "$app_category")
         ((entry_index++))
-    done <<< "$(extract_all_app_entries "$app_file")"
+    done <<<"$(extract_all_app_entries "$app_file")"
 
     local gui_result=$(yad --list --width=$WINDOW_WIDTH --height=$WINDOW_HEIGHT --separator="|" \
         --title="$screen_name" \
@@ -253,7 +249,7 @@ popup_edit_apps() {
         popup_home "$app_file"
     fi
 
-    IFS='|' read -r index app_name app_alias app_install app_description app_category <<< "$gui_result"
+    IFS='|' read -r index app_name app_alias app_install app_description app_category <<<"$gui_result"
     log_debug "$screen_name - App to edit: $app_name, $app_alias, $app_install, $app_description, $app_category"
     popup_edit_app "$app_file" "$app_name" "$app_category"
 
@@ -276,12 +272,12 @@ popup_edit_app() {
 
     log_info "$screen_name - Selected App: $app_name, $old_alias, $old_install, $old_description, $old_category"
 
-    local dropdown_options="$old_category"  # Start with the current category
+    local dropdown_options="$old_category" # Start with the current category
     while IFS= read -r cat; do
         if [[ "$cat" != "$old_category" ]]; then
-            dropdown_options+="!$cat"  # Append other categories
+            dropdown_options+="!$cat" # Append other categories
         fi
-    done <<< "$(extract_categories "$app_file")"
+    done <<<"$(extract_categories "$app_file")"
 
     local gui_result=$(yad --form --width=$WINDOW_WIDTH --height=$WINDOW_HEIGHT --separator="|" \
         --title="$screen_name" \
@@ -293,14 +289,14 @@ popup_edit_app() {
         --field="${TXT_COL_CATEGORY}":CB "$dropdown_options")
 
     if ! popup_is_canceled "$screen_name" "$gui_result"; then
-        IFS='|' read -r new_name new_alias new_install new_description new_category <<< "$gui_result"
-        
+        IFS='|' read -r new_name new_alias new_install new_description new_category <<<"$gui_result"
+
         if [[ "$new_install" == "TRUE" ]]; then
             new_install=true
         else
             new_install=false
         fi
-        
+
         log_info "$screen_name - Old: $app_name, $old_alias, $old_install, $old_description, $old_category"
         log_info "$screen_name - New: $new_name, $new_alias, $new_install, $new_description, $new_category"
 
@@ -318,7 +314,7 @@ popup_edit_app() {
                 install: $install,
                 description: (if $description == "" then null else $description end)
             }]' \
-            "$app_file" > tmp.$$.json && mv tmp.$$.json "$app_file"
+            "$app_file" >tmp.$$.json && mv tmp.$$.json "$app_file"
     fi
 }
 
@@ -332,7 +328,7 @@ popup_delete_apps() {
     while IFS='|' read -r app_name app_alias app_install app_description app_category; do
         app_entry_list+=("$entry_index" "FALSE" "$app_name" "$app_alias" "$app_install" "$app_description" "$app_category")
         ((entry_index++))
-    done <<< "$(extract_all_app_entries "$app_file")"
+    done <<<"$(extract_all_app_entries "$app_file")"
 
     local gui_result=$(yad --list --width=$WINDOW_WIDTH --height=$WINDOW_HEIGHT --separator="|" \
         --title="$screen_name" \
@@ -357,7 +353,7 @@ popup_delete_apps() {
             log_debug "$screen_name - App to delete: $index, $app_name, $app_alias, $app_install, $app_description, $app_category"
             indices_for_deletion+=("${index}")
         fi
-    done <<< "$gui_result"
+    done <<<"$gui_result"
 
     if [ ${#indices_for_deletion[@]} -eq 0 ]; then
         log_info "$screen_name - Nothing selected."
@@ -378,7 +374,7 @@ popup_delete_apps() {
             jq --arg name "$app_name" \
                 --arg category "$app_category" \
                 'del(.[$category][] | select(.name == $name))' \
-                "$app_file" > tmp.$$.json && mv tmp.$$.json "$app_file"
+                "$app_file" >tmp.$$.json && mv tmp.$$.json "$app_file"
             log_info "$screen_name - Deleted app: $app_name ($app_category)"
         else
             log_warning "$screen_name - App name or category is empty for index '$index'."
@@ -387,7 +383,6 @@ popup_delete_apps() {
 
     popup_delete_apps "$app_file"
 }
-
 
 # # # # # # # # # # # #|# # # # # # # # # # # #
 #              CATEGORY ACTIONS               #
@@ -407,11 +402,11 @@ popup_add_category() {
         if [[ -n "$new_category" ]]; then
             jq --arg category "$new_category" \
                 '.[$category] = []' \
-                "$app_file" > tmp.$$.json && mv tmp.$$.json "$app_file"
+                "$app_file" >tmp.$$.json && mv tmp.$$.json "$app_file"
             log_info "$screen_name - Added new category: $new_category"
         fi
     fi
-    
+
     popup_home "$app_file"
 }
 
@@ -424,7 +419,7 @@ popup_edit_categories() {
     while IFS= read -r category; do
         category_list+=("$entry_index" "$category")
         ((entry_index++))
-    done <<< "$(extract_categories "$app_file")"
+    done <<<"$(extract_categories "$app_file")"
 
     local gui_result=$(yad --list --width=$WINDOW_WIDTH --height=$WINDOW_HEIGHT --separator="|" \
         --title="$screen_name" \
@@ -439,7 +434,7 @@ popup_edit_categories() {
     fi
     log_debug "$screen_name - Selected: $gui_result"
 
-    IFS='|' read -r index category <<< "$gui_result"
+    IFS='|' read -r index category <<<"$gui_result"
     log_debug "$screen_name - Category to edit: $category"
     popup_edit_category "$app_file" "$category"
 
@@ -464,7 +459,7 @@ popup_edit_category() {
             jq --arg old_category "$old_category" \
                 --arg new_category "$new_category" \
                 'if has($new_category) then . else .[$new_category] = .[$old_category] | del(.[$old_category]) end' \
-                "$app_file" > tmp.$$.json && mv tmp.$$.json "$app_file"
+                "$app_file" >tmp.$$.json && mv tmp.$$.json "$app_file"
             log_info "$screen_name - Renamed category: $old_category to $new_category"
         fi
     fi
@@ -481,7 +476,7 @@ popup_delete_categories() {
         local apps_in_category=$(jq -r --arg category "$category" '.[$category] | map(.name) | join("; ")' "$app_file")
         category_list+=("$entry_index" "FALSE" "$category" "$apps_in_category")
         ((entry_index++))
-    done <<< "$(extract_categories "$app_file")"
+    done <<<"$(extract_categories "$app_file")"
 
     local gui_result=$(yad --list --width=$WINDOW_WIDTH --height=$WINDOW_HEIGHT --separator="|" \
         --title="$screen_name" \
@@ -503,7 +498,7 @@ popup_delete_categories() {
             log_debug "$screen_name - Category to delete: $category, $apps"
             categories_for_deletion+=("$category")
         fi
-    done <<< "$gui_result"
+    done <<<"$gui_result"
 
     if [ ${#categories_for_deletion[@]} -eq 0 ]; then
         log_info "$screen_name - Nothing selected."
@@ -514,7 +509,7 @@ popup_delete_categories() {
         if [[ -n "$category" ]]; then
             jq --arg category "$category" \
                 'del(.[$category])' \
-                "$app_file" > tmp.$$.json && mv tmp.$$.json "$app_file"
+                "$app_file" >tmp.$$.json && mv tmp.$$.json "$app_file"
             log_info "$screen_name - Deleted category: $category"
         else
             log_warning "$screen_name - Category is empty."
@@ -523,7 +518,6 @@ popup_delete_categories() {
 
     popup_delete_categories "$app_file"
 }
-
 
 # # # # # # # # # # # #|# # # # # # # # # # # #
 #                     HOME                    #
@@ -554,27 +548,27 @@ popup_home() {
     fi
 
     case "$action" in
-        "$TXT_SELECT_APPS_FOR_INSTALLATION" )
-            popup_select_apps_for_installation "$app_file"
-            ;;
-        "$TXT_ADD_APP" )
-            popup_add_app "$app_file"
-            ;;
-        "$TXT_EDIT_APPS" )
-            popup_edit_apps "$app_file"
-            ;;
-        "$TXT_DELETE_APPS" )
-            popup_delete_apps "$app_file"
-            ;;
-        "$TXT_ADD_CATEGORY" )
-            popup_add_category "$app_file"
-            ;;
-        "$TXT_EDIT_CATEGORIES" )
-            popup_edit_categories "$app_file"
-            ;;
-        "$TXT_DELETE_CATEGORIES" )
-            popup_delete_categories "$app_file"
-            ;;
+    "$TXT_SELECT_APPS_FOR_INSTALLATION")
+        popup_select_apps_for_installation "$app_file"
+        ;;
+    "$TXT_ADD_APP")
+        popup_add_app "$app_file"
+        ;;
+    "$TXT_EDIT_APPS")
+        popup_edit_apps "$app_file"
+        ;;
+    "$TXT_DELETE_APPS")
+        popup_delete_apps "$app_file"
+        ;;
+    "$TXT_ADD_CATEGORY")
+        popup_add_category "$app_file"
+        ;;
+    "$TXT_EDIT_CATEGORIES")
+        popup_edit_categories "$app_file"
+        ;;
+    "$TXT_DELETE_CATEGORIES")
+        popup_delete_categories "$app_file"
+        ;;
     esac
 }
 
@@ -592,7 +586,6 @@ edit_app_file() {
         log_error "'$app_file' could not be found!"
     fi
 }
-
 
 # # # # # # # # # # # #|# # # # # # # # # # # #
 #                    LOGIC                    #

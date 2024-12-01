@@ -3,7 +3,6 @@
 # DESCRIPTION:
 # This source helps to validate the current system.
 
-
 DISTRO_NAME=""
 
 MIN_UBUNTU_VERSION=24
@@ -30,22 +29,22 @@ validate_system() {
     log_info "The version of the distribution is: '$distro_version'"
 
     case "$DISTRO_NAME" in
-        ubuntu )
-            min_version=$MIN_UBUNTU_VERSION
-            ;;
-        debian )
-            min_version=$MIN_DEBIAN_VERSION
-            ;;
-        fedora )
-            min_version=$MIN_FEDORA_VERSION
-            ;;
-        * )
-            log_error "Unsupported distribution: '$DISTRO_NAME'"
-            return 1
-            ;;
+    ubuntu)
+        min_version=$MIN_UBUNTU_VERSION
+        ;;
+    debian)
+        min_version=$MIN_DEBIAN_VERSION
+        ;;
+    fedora)
+        min_version=$MIN_FEDORA_VERSION
+        ;;
+    *)
+        log_error "Unsupported distribution: '$DISTRO_NAME'"
+        return 1
+        ;;
     esac
 
-    if (( $(echo "$distro_version < $min_version" | bc -l) )); then
+    if (($(echo "$distro_version < $min_version" | bc -l))); then
         log_error "Unsupported version: '$distro_version' for '$DISTRO_NAME'. Minimum supported version is '$min_version'."
         return 1
     fi
@@ -54,7 +53,7 @@ validate_system() {
         local xdg_current_desktop=${XDG_CURRENT_DESKTOP:-$(echo $DESKTOP_SESSION)}
 
         log_info "The desktop environment is: '$xdg_current_desktop'"
-        
+
         if [[ "$xdg_current_desktop" != "GNOME" && "$xdg_current_desktop" != "ubuntu:GNOME" ]]; then
             log_error "Unsupported desktop environment: '$xdg_current_desktop'. Only GNOME is supported."
             return 1
