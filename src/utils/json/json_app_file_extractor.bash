@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # DESCRIPTION:
-# This source helps with the extraction for the 'app_file_editor.sh'.
+# This source helps with the extraction for the 'app_file_editor.bash'.
 
 extract_categories() {
     local apps_file=$1

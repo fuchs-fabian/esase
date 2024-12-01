@@ -4,12 +4,6 @@
   <a href="https://github.com/fuchs-fabian/esase/blob/main/config">
     <img alt="Configuration" src="https://img.shields.io/website?down_message=offline&label=config&up_color=007aff&up_message=online&url=https%3A%2F%2Fgithub.com%2Ffuchs-fabian%2Fesase%2Fblob%2Fmain%2Fconfig" />
   </a>
-  <a href="https://github.com/fuchs-fabian/esase/blob/main/install-esase.sh">
-    <img alt="Install script" src="https://img.shields.io/website?down_message=offline&label=install&up_color=007aff&up_message=online&url=https%3A%2F%2Fgithub.com%2Ffuchs-fabian%2Fesase%2Fblob%2Fmain%2Finstall-esase.sh" />
-  </a>
-  <a href="https://github.com/fuchs-fabian/esase/blob/main/uninstall-esase.sh">
-    <img alt="Install script" src="https://img.shields.io/website?down_message=offline&label=uninstall&up_color=007aff&up_message=online&url=https%3A%2F%2Fgithub.com%2Ffuchs-fabian%2Fesase%2Fblob%2Fmain%2Funinstall-esase.sh" />
-  </a>
   <a href="https://github.com/fuchs-fabian/esase/blob/main/LICENSE">
     <img alt="MIT License" src="https://img.shields.io/badge/license-MIT-brightgreen">
   </a>
@@ -78,7 +72,7 @@ The aim of `esase` is to highlight the challenges of switching between Linux des
 
 This tool is at a very early stage of development. Bugs may be present. If you find a bug, please create an issue or a pull request.
 
-It is a Bash script that can have a strong impact on the system. It is therefore particularly important that you check what happens in the `.sh` files before you use it.
+It is a Bash script that can have a strong impact on the system. It is therefore particularly important that you check what happens in the `.bash` files before you use it.
 
 > Only do it if you know roughly what is going to happen.
 
@@ -136,12 +130,12 @@ esase -h
 
 ### Use without installation
 
-No problem, just make the script `esase.sh` executable and start it.
+No problem, just make the script `esase.bash` executable and start it.
 
 - Then no app icon will be created in your app menu.
 - No "critical" or "unwanted" changes are made to the file system.
 
-**Disadvantage**: You have to start it via the console and you need to know the exact path of `esase.sh`.
+**Disadvantage**: You have to start it via the console and you need to know the exact path of `esase.bash`.
 
 ## Reinstall with own configuration files
 

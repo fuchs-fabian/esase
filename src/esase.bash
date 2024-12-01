@@ -25,7 +25,7 @@ APP_FILES_DIR="$CONFIG_DIR/app_files"
 LANG_DIR="$CURRENT_SCRIPT_DIR/lang"
 
 # Directories from installation
-LOCAL_BIN_DIR="/usr/local/bin"           # script 'esase.sh'
+LOCAL_BIN_DIR="/usr/local/bin"           # script 'esase.bash'
 LOCAL_ETC_DIR="/usr/local/etc/esase"     # dir    'lang'
 LOCAL_SHARE_DIR="/usr/local/share/esase" # dirs   'scripts' & 'utils' | image 'esase-icon.png'
 VAR_LIB_DIR="/var/lib/esase"             # dir    'config'
@@ -61,16 +61,16 @@ set_directories_based_on_location
 # # # # # # # # # # # #|# # # # # # # # # # # #
 
 SOURCE_FILES=(
-    "logger.sh"
-    "general/conf.sh"
-    "general/gui.sh"
-    "general/preparations.sh"
-    "json/json_config_extractor.sh"
-    "general/popup.sh"
-    "general/system_validation.sh"
-    "lang/language.sh"
-    "modes/config_mode.sh"
-    "modes/gui_mode.sh"
+    "logger.bash"
+    "general/conf.bash"
+    "general/gui.bash"
+    "general/preparations.bash"
+    "json/json_config_extractor.bash"
+    "general/popup.bash"
+    "general/system_validation.bash"
+    "lang/language.bash"
+    "modes/config_mode.bash"
+    "modes/gui_mode.bash"
 )
 
 for source_file in "${SOURCE_FILES[@]}"; do
@@ -84,9 +84,9 @@ done
 #                   SCRIPTS                   #
 # # # # # # # # # # # #|# # # # # # # # # # # #
 
-DISTRO_BASED_ACTIONS_SCRIPT="$SCRIPTS_DIR/distro_based_actions.sh"
-APP_FILE_EDITOR_SCRIPT="$SCRIPTS_DIR/app_file_editor.sh"
-APP_INSTALLER_SCRIPT="$SCRIPTS_DIR/app_installer.sh"
+DISTRO_BASED_ACTIONS_SCRIPT="$SCRIPTS_DIR/distro_based_actions.bash"
+APP_FILE_EDITOR_SCRIPT="$SCRIPTS_DIR/app_file_editor.bash"
+APP_INSTALLER_SCRIPT="$SCRIPTS_DIR/app_installer.bash"
 
 # # # # # # # # # # # #|# # # # # # # # # # # #
 #                    FILES                    #
@@ -145,7 +145,7 @@ while getopts ":hdgc:l:i:ur:" opt; do
         ;;
     d)
         log_debug "'-d' selected"
-        # Overwrites the variable in 'logger.sh'
+        # Overwrites the variable in 'logger.bash'
         ENABLE_DEBUG_LOGGING=true
         ;;
     g)

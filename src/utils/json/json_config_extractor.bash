@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # DESCRIPTION:
-# This source helps with the extraction for the config mode of 'esase.sh'.
+# This source helps with the extraction for the config mode of 'esase.bash'.
 
 extract_flag_from_field() {
     local config_file=$1

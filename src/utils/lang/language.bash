@@ -47,8 +47,8 @@ set_language() {
 
     log_debug "Using language configuration: '$LANGUAGE_CONF'"
 
-    source "$SOURCES_DIR/lang/dictionary.sh" || {
-        echo "Error: Could not source 'dictionary.sh' for '$0'."
+    source "$SOURCES_DIR/lang/dictionary.bash" || {
+        echo "Error: Could not source 'dictionary.bash' for '$0'."
         exit 1
     }
 }

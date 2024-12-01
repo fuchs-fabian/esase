@@ -17,7 +17,7 @@ SOURCES_DIR="$CURRENT_SCRIPT_DIR/src/utils"
 SCRIPTS_DIR="$CURRENT_SCRIPT_DIR/src/scripts"
 
 # Directories for installation
-LOCAL_BIN_DIR="/usr/local/bin"           # script 'esase.sh'
+LOCAL_BIN_DIR="/usr/local/bin"           # script 'esase.bash'
 LOCAL_ETC_DIR="/usr/local/etc/esase"     # dir    'lang'
 LOCAL_SHARE_DIR="/usr/local/share/esase" # dirs   'scripts' & 'utils' | image 'esase-icon.png'
 VAR_LIB_DIR="/var/lib/esase"             # dir    'config'
@@ -30,9 +30,9 @@ DESKTOP_FILES_DIR="$HOME/.local/share/applications"
 # # # # # # # # # # # #|# # # # # # # # # # # #
 
 SOURCE_FILES=(
-    "logger.sh"
-    "general/preparations.sh"
-    "general/system_validation.sh"
+    "logger.bash"
+    "general/preparations.bash"
+    "general/system_validation.bash"
 )
 
 for source_file in "${SOURCE_FILES[@]}"; do
@@ -46,7 +46,7 @@ done
 #                   SCRIPTS                   #
 # # # # # # # # # # # #|# # # # # # # # # # # #
 
-DISTRO_BASED_ACTIONS_SCRIPT="$SCRIPTS_DIR/distro_based_actions.sh"
+DISTRO_BASED_ACTIONS_SCRIPT="$SCRIPTS_DIR/distro_based_actions.bash"
 
 # # # # # # # # # # # #|# # # # # # # # # # # #
 #         OVERWRITING LOGGING VARIABLES       #
@@ -79,7 +79,7 @@ copy_desktop_file() {
 }
 
 install_esase() {
-    local script_file="$CURRENT_SCRIPT_DIR/src/esase.sh"
+    local script_file="$CURRENT_SCRIPT_DIR/src/esase.bash"
 
     local config_dir="$CURRENT_SCRIPT_DIR/config"
     local lang_dir="$CURRENT_SCRIPT_DIR/src/lang"
@@ -98,7 +98,7 @@ install_esase() {
     )
 
     # Check if 'esase' is already installed
-    if [[ -f "$LOCAL_BIN_DIR/esase.sh" ]]; then
+    if [[ -f "$LOCAL_BIN_DIR/esase.bash" ]]; then
         copy_desktop_file
         log_error "'esase' is already installed. Installation aborted!"
     fi
@@ -129,11 +129,11 @@ install_esase() {
     done
 
     # Copy the main script to /usr/local/bin
-    if sudo cp "$script_file" "$LOCAL_BIN_DIR/esase.sh"; then
-        sudo chmod +x "$LOCAL_BIN_DIR/esase.sh"
-        log_info "Successfully copied '$script_file' to '$LOCAL_BIN_DIR/esase.sh'."
+    if sudo cp "$script_file" "$LOCAL_BIN_DIR/esase.bash"; then
+        sudo chmod +x "$LOCAL_BIN_DIR/esase.bash"
+        log_info "Successfully copied '$script_file' to '$LOCAL_BIN_DIR/esase.bash'."
     else
-        log_error "Failed to copy '$script_file' to '$LOCAL_BIN_DIR/esase.sh'."
+        log_error "Failed to copy '$script_file' to '$LOCAL_BIN_DIR/esase.bash'."
     fi
 
     # Copy the icon file
@@ -155,9 +155,9 @@ install_esase() {
         log_warning "'$VAR_LIB_DIR/config' directory does not exist."
     fi
 
-    # Create a symbolic link for 'esase' to point to 'esase.sh'
-    # This makes it possible to run 'esase' instead of 'esase.sh' directly.
-    sudo ln -s $LOCAL_BIN_DIR/esase.sh $LOCAL_BIN_DIR/esase
+    # Create a symbolic link for 'esase' to point to 'esase.bash'
+    # This makes it possible to run 'esase' instead of 'esase.bash' directly.
+    sudo ln -s $LOCAL_BIN_DIR/esase.bash $LOCAL_BIN_DIR/esase
     ls -larth $LOCAL_BIN_DIR
 
     log_info "Installation complete."
@@ -168,7 +168,7 @@ install_esase() {
 # # # # # # # # # # # #|# # # # # # # # # # # #
 
 uninstall_esase() {
-    local script_file="$LOCAL_BIN_DIR/esase.sh"
+    local script_file="$LOCAL_BIN_DIR/esase.bash"
     local symlink="$LOCAL_BIN_DIR/esase"
     local desktop_file="$DESKTOP_FILES_DIR/esase.desktop"
 

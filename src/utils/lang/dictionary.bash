@@ -3,7 +3,7 @@
 # DESCRIPTION:
 # This source provides variables for the selected language.
 # The files (<lang>.conf) for the languages can be found in the 'esase' main directory under 'lang'.
-# For this source, the source 'utils/general/conf.sh' must be included beforehand
+# For this source, the source 'utils/general/conf.bash' must be included beforehand
 
 # # # # # # # # # # # #|# # # # # # # # # # # #
 #         SCRIPT OVERLAPPING VARIABLES        #

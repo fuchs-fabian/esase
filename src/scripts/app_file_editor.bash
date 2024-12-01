@@ -14,7 +14,7 @@ SOURCES_DIR="$CURRENT_SCRIPT_DIR/../utils"
 LANG_DIR="$CURRENT_SCRIPT_DIR/../lang"
 
 # Directories from installation
-LOCAL_BIN_DIR="/usr/local/bin"           # script 'esase.sh'
+LOCAL_BIN_DIR="/usr/local/bin"           # script 'esase.bash'
 LOCAL_ETC_DIR="/usr/local/etc/esase"     # dir    'lang'
 LOCAL_SHARE_DIR="/usr/local/share/esase" # dirs   'scripts' & 'utils' | image 'esase-icon.png'
 VAR_LIB_DIR="/var/lib/esase"             # dir    'config'
@@ -40,13 +40,13 @@ set_directories_based_on_location
 # # # # # # # # # # # #|# # # # # # # # # # # #
 
 SOURCE_FILES=(
-    "logger.sh"
-    "general/conf.sh"
-    "general/gui.sh"
-    "general/preparations.sh"
-    "json/json_app_file_extractor.sh"
-    "general/popup.sh"
-    "lang/language.sh"
+    "logger.bash"
+    "general/conf.bash"
+    "general/gui.bash"
+    "general/preparations.bash"
+    "json/json_app_file_extractor.bash"
+    "general/popup.bash"
+    "lang/language.bash"
 )
 
 for source_file in "${SOURCE_FILES[@]}"; do
@@ -80,7 +80,7 @@ while getopts ":hd:l:f:" opt; do
         ;;
     d)
         log_debug "'-d' selected: '$OPTARG'"
-        # Overwrites the variable in 'logger.sh'
+        # Overwrites the variable in 'logger.bash'
         ENABLE_DEBUG_LOGGING="${OPTARG}"
         ;;
     l)
