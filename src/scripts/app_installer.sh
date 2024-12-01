@@ -10,7 +10,7 @@
 CURRENT_SCRIPT_DIR=$(dirname "$(realpath "$0")")
 
 # Default directories
-SOURCES_DIR="$CURRENT_SCRIPT_DIR/../src/sources"
+SOURCES_DIR="$CURRENT_SCRIPT_DIR/../sources"
 
 # Directories from installation
 LOCAL_BIN_DIR="/usr/local/bin"           # script 'esase.sh'
