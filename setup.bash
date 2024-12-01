@@ -60,7 +60,7 @@ ENABLE_GUI_FOR_LOGGING=false
 # # # # # # # # # # # #|# # # # # # # # # # # #
 
 copy_desktop_file() {
-    local desktop_dir="$CURRENT_SCRIPT_DIR/src/desktop"
+    local desktop_dir="$CURRENT_SCRIPT_DIR/desktop"
     local desktop_file="$desktop_dir/esase.desktop"
     local destination="$DESKTOP_FILES_DIR/esase.desktop"
 
@@ -85,7 +85,7 @@ install_esase() {
     local lang_dir="$CURRENT_SCRIPT_DIR/src/lang"
     local scripts_dir="$CURRENT_SCRIPT_DIR/src/scripts"
     local utils_dir="$CURRENT_SCRIPT_DIR/src/utils"
-    local desktop_dir="$CURRENT_SCRIPT_DIR/src/desktop"
+    local desktop_dir="$CURRENT_SCRIPT_DIR/desktop"
 
     local icon_file="$desktop_dir/esase-icon.png"
 

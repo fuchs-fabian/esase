@@ -4,8 +4,8 @@
   <a href="https://github.com/fuchs-fabian/esase/blob/main/config">
     <img alt="Configuration" src="https://img.shields.io/website?down_message=offline&label=config&up_color=007aff&up_message=online&url=https%3A%2F%2Fgithub.com%2Ffuchs-fabian%2Fesase%2Fblob%2Fmain%2Fconfig" />
   </a>
-  <a href="https://github.com/fuchs-fabian/esase/blob/main/LICENSE">
-    <img alt="MIT License" src="https://img.shields.io/badge/license-MIT-brightgreen">
+  <a href="./LICENSE">
+    <img alt="GPL-3.0 License" src="https://img.shields.io/badge/GitHub-GPL--3.0-informational" />
   </a>
 </p>
 
